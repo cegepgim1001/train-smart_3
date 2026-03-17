@@ -1,0 +1,60 @@
+[
+  {
+    "id": "athlete_001",
+    "name": "Founding Athlete",
+    "avatar": "🏋️",
+    "height_cm": 180,
+    "start_weight_kg": 135,
+    "target_weight_kg": 120,
+    "age": 55,
+    "sex": "male",
+    "athletic_background": "High-level sport, ages 10–30 (20 years of elite-level activity)",
+    "body_composition_note": "Significant existing muscle mass from decades of sport; carries 135 kg as if ~110 kg due to frame and musculature",
+    "health_triggers": ["High blood pressure above 110 kg with salt/oils", "Sleep apnea above 110 kg with salt/oils"],
+    "health_resolutions": ["BP normalizes below 110 kg with clean eating", "Apnea resolves below 110 kg with clean eating"],
+    "injuries": ["Lower back pain and limited motion when sedentary; resolves with regular exercise"],
+    "metabolism_note": "Extremely efficient — gains weight easily; recovery is excellent",
+    "dietary_restrictions": ["no_oils", "no_salt", "no_dairy", "keto", "intermittent_fasting"],
+    "gym": "FSC Fitness Sport Club — Calle Malagón 2, Hortaleza, Madrid",
+    "gym_hours": "5:00 AM – 00:00, 365 days/year",
+    "plan_duration_weeks": 20,
+    "macro_targets": {
+      "protein_g": { "min": 180, "max": 220 },
+      "fat_g": { "min": 60, "max": 80 },
+      "net_carbs_g": { "min": 20, "max": 40 },
+      "fibre_g": { "min": 25, "max": 35 },
+      "calories": { "min": 1800, "max": 2200 },
+      "water_litres": { "min": 3, "max": 4 }
+    },
+    "if_progression": [
+      { "weeks": "1-3", "protocol": "12:12", "fasting_hours": 12, "eating_window": "8:00 AM – 8:00 PM" },
+      { "weeks": "4-6", "protocol": "13:11", "fasting_hours": 13, "eating_window": "9:00 AM – 8:00 PM" },
+      { "weeks": "7-9", "protocol": "14:10", "fasting_hours": 14, "eating_window": "10:00 AM – 8:00 PM" },
+      { "weeks": "10-13", "protocol": "15:9", "fasting_hours": 15, "eating_window": "11:00 AM – 8:00 PM" },
+      { "weeks": "14-20", "protocol": "16:8", "fasting_hours": 16, "eating_window": "12:00 PM – 8:00 PM" }
+    ],
+    "performance_targets": {
+      "pull_ups": 5,
+      "push_ups": 30,
+      "dips": 15,
+      "burpees_with_squat": 50,
+      "chin_ups": 8,
+      "plank_seconds": 300
+    },
+    "performance_milestones": [
+      { "week": 4, "pull_ups": 0, "push_ups": 12, "dips": 0, "burpees": 10, "chin_ups": 0, "plank_sec": 45, "weight_kg": 131 },
+      { "week": 8, "pull_ups": 2, "push_ups": 15, "dips": 5, "burpees": 20, "chin_ups": 3, "plank_sec": 90, "weight_kg": 128 },
+      { "week": 12, "pull_ups": 3, "push_ups": 22, "dips": 8, "burpees": 30, "chin_ups": 5, "plank_sec": 150, "weight_kg": 125 },
+      { "week": 16, "pull_ups": 4, "push_ups": 25, "dips": 12, "burpees": 40, "chin_ups": 7, "plank_sec": 210, "weight_kg": 123 },
+      { "week": 20, "pull_ups": 5, "push_ups": 30, "dips": 15, "burpees": 50, "chin_ups": 8, "plank_sec": 300, "weight_kg": 120 }
+    ],
+    "supplements": [
+      { "name": "Magnesium Glycinate", "dose": "400 mg before bed", "reason": "Prevents cramps on low-salt keto; improves sleep quality" },
+      { "name": "Vitamin D3", "dose": "2,000–4,000 IU daily", "reason": "Critical for immune function and mood" },
+      { "name": "Omega-3 Fish Oil", "dose": "2g EPA+DHA daily", "reason": "Anti-inflammatory" },
+      { "name": "Creatine Monohydrate", "dose": "5g daily", "reason": "Improves strength, recovery, and lean mass" }
+    ],
+    "weekly_logs": [],
+    "created_at": "2026-03-17"
+  }
+]

@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REFORGE — 20-Week Body Recomposition System</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-deep:#06070b;--bg-primary:#0c0e14;--bg-card:#12151e;--bg-card-hover:#181c28;
+  --bg-elevated:#1a1e2b;--bg-input:#0f1119;
+  --text-primary:#e8eaf0;--text-secondary:#8b92a8;--text-muted:#555d75;--text-dim:#3a4058;
+  --accent-cyan:#00d4ff;--accent-teal:#00e5b0;--accent-orange:#ff8a3d;--accent-red:#ff4d6a;
+  --accent-purple:#a78bfa;--accent-green:#34d399;--accent-yellow:#fbbf24;
+  --gradient-main:linear-gradient(135deg,#00d4ff 0%,#00e5b0 50%,#a78bfa 100%);
+  --gradient-warm:linear-gradient(135deg,#ff8a3d 0%,#ff4d6a 100%);
+  --gradient-cool:linear-gradient(135deg,#00d4ff 0%,#a78bfa 100%);
+  --border-subtle:1px solid rgba(255,255,255,0.04);
+  --border-accent:1px solid rgba(0,212,255,0.15);
+  --shadow-sm:0 2px 8px rgba(0,0,0,0.3);--shadow-md:0 4px 20px rgba(0,0,0,0.4);
+  --shadow-lg:0 8px 40px rgba(0,0,0,0.5);--shadow-glow:0 0 30px rgba(0,212,255,0.1);
+  --radius-sm:6px;--radius-md:12px;--radius-lg:20px;--radius-xl:28px;
+  --font-display:'Sora',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace;
+  --ease-out-expo:cubic-bezier(0.16,1,0.3,1);--ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-deep);color:var(--text-primary);
+  line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:700;line-height:1.2;letter-spacing:-0.02em}
+a{color:var(--accent-cyan);text-decoration:none;transition:color .2s}
+a:hover{color:var(--accent-teal)}
+input,select,textarea,button{font-family:inherit;font-size:inherit}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--text-dim);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
+
+/* === LAYOUT === */
+.app-shell{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--bg-primary);border-right:var(--border-subtle);
+  display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;
+  transition:transform .4s var(--ease-out-expo)}
+.sidebar-header{padding:24px 20px;border-bottom:var(--border-subtle)}
+.sidebar-logo{display:flex;align-items:center;gap:12px}
+.sidebar-logo .logo-mark{width:42px;height:42px;border-radius:var(--radius-md);
+  background:var(--gradient-main);display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:800;color:#06070b;font-family:var(--font-display)}
+.sidebar-logo .logo-text{font-family:var(--font-display);font-size:18px;font-weight:800;
+  letter-spacing:0.08em;background:var(--gradient-main);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent}
+.sidebar-logo .logo-sub{font-size:10px;color:var(--text-muted);letter-spacing:0.15em;
+  text-transform:uppercase;margin-top:2px}
+.sidebar-nav{flex:1;padding:16px 0;overflow-y:auto}
+.nav-section-title{font-size:10px;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--text-dim);padding:20px 20px 8px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:10px 20px;margin:2px 8px;
+  border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;color:var(--text-secondary);
+  font-size:14px;font-weight:500;position:relative}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text-primary)}
+.nav-item.active{background:rgba(0,212,255,0.08);color:var(--accent-cyan)}
+.nav-item.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:3px;height:20px;background:var(--accent-cyan);border-radius:0 3px 3px 0}
+.nav-item .nav-icon{width:20px;text-align:center;font-size:16px}
+.nav-item .nav-badge{margin-left:auto;background:var(--accent-orange);color:#000;
+  font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px}
+.sidebar-footer{padding:16px 20px;border-top:var(--border-subtle);font-size:11px;color:var(--text-dim)}
+.main-content{margin-left:260px;flex:1;min-height:100vh}
+.page-header{padding:28px 36px 20px;border-bottom:var(--border-subtle);
+  background:linear-gradient(180deg,rgba(0,212,255,0.02) 0%,transparent 100%)}
+.page-title{font-size:28px;font-weight:800;margin-bottom:4px}
+.page-subtitle{color:var(--text-secondary);font-size:14px}
+.page-body{padding:28px 36px 60px}
+.page-section{display:none}
+.page-section.active{display:block;animation:fadeSlideIn .5s var(--ease-out-expo)}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* === CARDS === */
+.card{background:var(--bg-card);border:var(--border-subtle);border-radius:var(--radius-lg);
+  padding:24px;transition:all .3s var(--ease-out-expo)}
+.card:hover{border-color:rgba(255,255,255,0.06);box-shadow:var(--shadow-sm)}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card-title .ct-icon{font-size:18px}
+
+/* === GRID === */
+.grid{display:grid;gap:20px}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1200px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}
+  .main-content{margin-left:0}.mobile-toggle{display:flex !important}}
+
+/* === STAT CARDS === */
+.stat-card{background:var(--bg-card);border:var(--border-subtle);border-radius:var(--radius-lg);
+  padding:20px 24px;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stat-card.cyan::before{background:var(--gradient-cool)}
+.stat-card.orange::before{background:var(--gradient-warm)}
+.stat-card.green::before{background:linear-gradient(90deg,var(--accent-green),var(--accent-teal))}
+.stat-card.purple::before{background:linear-gradient(90deg,var(--accent-purple),var(--accent-cyan))}
+.stat-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:8px}
+.stat-value{font-family:var(--font-display);font-size:32px;font-weight:800;margin-bottom:4px}
+.stat-value.cyan{color:var(--accent-cyan)}.stat-value.orange{color:var(--accent-orange)}
+.stat-value.green{color:var(--accent-green)}.stat-value.purple{color:var(--accent-purple)}
+.stat-change{font-size:12px;color:var(--text-secondary)}
+.stat-change.positive{color:var(--accent-green)}.stat-change.negative{color:var(--accent-red)}
+
+/* === BUTTONS === */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:var(--radius-sm);
+  font-weight:600;font-size:13px;cursor:pointer;transition:all .25s var(--ease-out-expo);border:none;
+  font-family:var(--font-display);letter-spacing:0.02em}
+.btn-primary{background:var(--gradient-main);color:#06070b}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,212,255,0.3)}
+.btn-secondary{background:var(--bg-elevated);color:var(--text-primary);border:var(--border-subtle)}
+.btn-secondary:hover{background:var(--bg-card-hover);border-color:rgba(255,255,255,0.08)}
+.btn-danger{background:rgba(255,77,106,0.1);color:var(--accent-red);border:1px solid rgba(255,77,106,0.2)}
+.btn-sm{padding:6px 14px;font-size:12px}
+.btn-icon{width:36px;height:36px;padding:0;display:flex;align-items:center;justify-content:center;
+  border-radius:var(--radius-sm);background:var(--bg-elevated);border:var(--border-subtle);
+  color:var(--text-secondary);cursor:pointer;transition:all .2s}
+.btn-icon:hover{color:var(--accent-cyan);border-color:rgba(0,212,255,0.2)}
+
+/* === FORMS === */
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);
+  margin-bottom:6px;letter-spacing:0.03em}
+.form-input,.form-select,.form-textarea{width:100%;padding:10px 14px;background:var(--bg-input);
+  border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius-sm);color:var(--text-primary);
+  font-size:14px;transition:border-color .2s;outline:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent-cyan);
+  box-shadow:0 0 0 3px rgba(0,212,255,0.1)}
+.form-textarea{resize:vertical;min-height:80px}
+.form-select{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b92a8'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center}
+.form-row{display:flex;gap:12px}.form-row>*{flex:1}
+
+/* === TABLES === */
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th{text-align:left;padding:10px 14px;font-size:11px;font-weight:600;
+  letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);
+  border-bottom:1px solid rgba(255,255,255,0.06)}
+.data-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.03);
+  color:var(--text-secondary)}
+.data-table tr:hover td{background:rgba(255,255,255,0.02);color:var(--text-primary)}
+.data-table .highlight{color:var(--accent-cyan);font-weight:600}
+
+/* === PROGRESS BAR === */
+.progress-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;transition:width .8s var(--ease-out-expo)}
+.progress-fill.cyan{background:var(--gradient-cool)}
+.progress-fill.orange{background:var(--gradient-warm)}
+.progress-fill.green{background:linear-gradient(90deg,var(--accent-green),var(--accent-teal))}
+
+/* === TAGS === */
+.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;
+  font-weight:600;letter-spacing:0.03em}
+.tag-cyan{background:rgba(0,212,255,0.1);color:var(--accent-cyan)}
+.tag-orange{background:rgba(255,138,61,0.1);color:var(--accent-orange)}
+.tag-green{background:rgba(52,211,153,0.1);color:var(--accent-green)}
+.tag-red{background:rgba(255,77,106,0.1);color:var(--accent-red)}
+.tag-purple{background:rgba(167,139,250,0.1);color:var(--accent-purple)}
+
+/* === TABS === */
+.tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.04);padding-bottom:0}
+.tab{padding:10px 18px;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .2s;margin-bottom:-1px}
+.tab:hover{color:var(--text-secondary)}
+.tab.active{color:var(--accent-cyan);border-bottom-color:var(--accent-cyan)}
+
+/* === MODAL === */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;
+  display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;
+  transition:opacity .3s;backdrop-filter:blur(4px)}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal{background:var(--bg-card);border-radius:var(--radius-xl);padding:32px;
+  width:90%;max-width:600px;max-height:85vh;overflow-y:auto;transform:scale(0.95);
+  transition:transform .3s var(--ease-spring);border:var(--border-subtle);box-shadow:var(--shadow-lg)}
+.modal-overlay.open .modal{transform:scale(1)}
+.modal-title{font-size:20px;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.modal-actions{display:flex;gap:10px;margin-top:24px;justify-content:flex-end}
+
+/* === DASHBOARD SPECIFIC === */
+.dash-hero{background:linear-gradient(135deg,rgba(0,212,255,0.05) 0%,rgba(167,139,250,0.05) 100%);
+  border:var(--border-accent);border-radius:var(--radius-xl);padding:32px;margin-bottom:24px;
+  position:relative;overflow:hidden}
+.dash-hero::before{content:'';position:absolute;top:-50%;right:-20%;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(0,212,255,0.06) 0%,transparent 70%);pointer-events:none}
+.dash-hero-row{display:flex;align-items:center;gap:24px}
+.dash-avatar{width:72px;height:72px;border-radius:var(--radius-lg);
+  background:var(--gradient-main);display:flex;align-items:center;justify-content:center;
+  font-size:36px;flex-shrink:0}
+.dash-name{font-size:26px;font-weight:800}
+.dash-meta{color:var(--text-secondary);font-size:13px;margin-top:4px}
+.dash-meta span{margin-right:16px}
+.dash-week-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;
+  border-radius:20px;background:rgba(0,229,176,0.1);color:var(--accent-teal);
+  font-size:13px;font-weight:700;font-family:var(--font-display);margin-top:10px}
+
+.chart-container{position:relative;height:260px}
+.mini-chart{position:relative;height:180px}
+
+/* === MEAL LOG === */
+.meal-card{background:var(--bg-card);border:var(--border-subtle);border-radius:var(--radius-lg);
+  padding:20px;margin-bottom:12px}
+.meal-time{font-size:11px;font-weight:600;color:var(--text-muted);letter-spacing:0.1em;
+  text-transform:uppercase}
+.meal-name{font-size:16px;font-weight:700;margin:4px 0 12px}
+.meal-items{display:flex;flex-direction:column;gap:6px}
+.meal-item{display:flex;align-items:center;gap:10px;padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,0.02)}
+.meal-item:last-child{border-bottom:none}
+.meal-item-emoji{font-size:20px;width:28px;text-align:center}
+.meal-item-info{flex:1}
+.meal-item-name{font-size:13px;font-weight:500;color:var(--text-primary)}
+.meal-item-detail{font-size:11px;color:var(--text-muted)}
+.meal-item-macros{display:flex;gap:8px;font-size:11px;font-family:var(--font-mono)}
+.meal-item-macros span{padding:2px 6px;border-radius:4px}
+.macro-p{background:rgba(0,212,255,0.08);color:var(--accent-cyan)}
+.macro-f{background:rgba(255,138,61,0.08);color:var(--accent-orange)}
+.macro-c{background:rgba(167,139,250,0.08);color:var(--accent-purple)}
+
+/* === EXERCISE CARD === */
+.exercise-card{background:var(--bg-card);border:var(--border-subtle);border-radius:var(--radius-lg);
+  padding:20px;margin-bottom:12px;transition:all .3s}
+.exercise-card:hover{border-color:rgba(0,212,255,0.1)}
+.exercise-phase{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:6px}
+.exercise-name{font-size:16px;font-weight:700;margin-bottom:6px}
+.exercise-detail{font-size:13px;color:var(--text-secondary);margin-bottom:10px;line-height:1.6}
+.exercise-cues{display:flex;flex-wrap:wrap;gap:6px}
+.exercise-cue{font-size:11px;padding:3px 10px;border-radius:12px;
+  background:rgba(52,211,153,0.08);color:var(--accent-green)}
+
+/* === PHASE TIMELINE === */
+.phase-timeline{display:flex;gap:0;margin-bottom:32px}
+.phase-block{flex:1;padding:16px;text-align:center;position:relative;cursor:pointer;transition:all .3s}
+.phase-block::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--text-dim);transition:background .3s}
+.phase-block.active::after{background:var(--gradient-main)}
+.phase-block.completed::after{background:var(--accent-green)}
+.phase-num{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);margin-bottom:2px}
+.phase-label{font-size:13px;font-weight:700}
+.phase-weeks{font-size:11px;color:var(--text-muted);margin-top:2px}
+
+/* === KNOWLEDGE BASE === */
+.kb-section{margin-bottom:40px}
+.kb-section h2{font-size:22px;margin-bottom:16px;padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,0.06)}
+.kb-section h3{font-size:17px;margin:20px 0 10px;color:var(--accent-cyan)}
+.kb-section h4{font-size:15px;margin:16px 0 8px;color:var(--accent-teal)}
+.kb-section p{color:var(--text-secondary);margin-bottom:12px;font-size:14px;line-height:1.75}
+.kb-section ul,.kb-section ol{color:var(--text-secondary);margin-bottom:12px;padding-left:24px;
+  font-size:14px;line-height:1.75}
+.kb-section li{margin-bottom:4px}
+.kb-section strong{color:var(--text-primary);font-weight:600}
+.kb-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.kb-table th{background:rgba(0,212,255,0.06);padding:10px 14px;text-align:left;
+  font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--accent-cyan);border:1px solid rgba(255,255,255,0.04)}
+.kb-table td{padding:10px 14px;border:1px solid rgba(255,255,255,0.04);color:var(--text-secondary)}
+.kb-table tr:hover td{background:rgba(255,255,255,0.02)}
+.kb-callout{background:linear-gradient(135deg,rgba(0,212,255,0.06),rgba(167,139,250,0.04));
+  border-left:3px solid var(--accent-cyan);padding:16px 20px;border-radius:0 var(--radius-md) var(--radius-md) 0;
+  margin:16px 0;font-size:14px;color:var(--text-secondary)}
+.kb-callout strong{color:var(--accent-cyan)}
+.kb-warning{background:rgba(255,138,61,0.06);border-left-color:var(--accent-orange)}
+.kb-warning strong{color:var(--accent-orange)}
+.kb-danger{background:rgba(255,77,106,0.06);border-left-color:var(--accent-red)}
+.kb-danger strong{color:var(--accent-red)}
+
+/* === ADVICE ENGINE === */
+.advice-card{background:linear-gradient(135deg,rgba(0,229,176,0.06),rgba(0,212,255,0.04));
+  border:1px solid rgba(0,229,176,0.15);border-radius:var(--radius-lg);padding:24px;margin-top:20px}
+.advice-title{font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px}
+.advice-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.03);
+  font-size:13px;color:var(--text-secondary);line-height:1.7}
+.advice-item:last-child{border-bottom:none}
+.advice-item strong{color:var(--text-primary)}
+.advice-priority{display:inline-flex;padding:2px 8px;border-radius:10px;font-size:10px;
+  font-weight:700;margin-right:8px}
+.advice-priority.high{background:rgba(255,77,106,0.15);color:var(--accent-red)}
+.advice-priority.medium{background:rgba(255,138,61,0.15);color:var(--accent-orange)}
+.advice-priority.low{background:rgba(52,211,153,0.15);color:var(--accent-green)}
+
+/* === EMPTY STATE === */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-muted)}
+.empty-state .empty-icon{font-size:48px;margin-bottom:16px}
+.empty-state .empty-title{font-size:18px;font-weight:700;color:var(--text-secondary);margin-bottom:8px}
+.empty-state .empty-desc{font-size:14px;margin-bottom:20px}
+
+/* === MOBILE TOGGLE === */
+.mobile-toggle{display:none;position:fixed;top:16px;left:16px;z-index:200;width:44px;height:44px;
+  border-radius:var(--radius-sm);background:var(--bg-card);border:var(--border-subtle);
+  align-items:center;justify-content:center;cursor:pointer;font-size:20px;color:var(--text-secondary)}
+
+/* === TOAST === */
+.toast{position:fixed;bottom:24px;right:24px;z-index:2000;padding:14px 24px;
+  border-radius:var(--radius-md);font-size:13px;font-weight:600;transform:translateY(100px);
+  opacity:0;transition:all .4s var(--ease-spring);max-width:360px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{background:rgba(52,211,153,0.15);color:var(--accent-green);
+  border:1px solid rgba(52,211,153,0.3)}
+.toast.error{background:rgba(255,77,106,0.15);color:var(--accent-red);
+  border:1px solid rgba(255,77,106,0.3)}
+
+/* === PRINT === */
+@media print{.sidebar,.mobile-toggle{display:none}.main-content{margin-left:0}}
+</style>
+</head>
+<body>
+
+<div class="mobile-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</div>
+
+<div class="app-shell">
+<!-- === SIDEBAR === -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div class="logo-mark">R</div>
+      <div><div class="logo-text">REFORGE</div><div class="logo-sub">Body Recomposition System</div></div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-title">Overview</div>
+    <div class="nav-item active" data-page="dashboard"><span class="nav-icon">📊</span>Dashboard</div>
+    <div class="nav-item" data-page="daily-log"><span class="nav-icon">📝</span>Daily Log<span class="nav-badge" id="logBadge">TODAY</span></div>
+    <div class="nav-item" data-page="progress"><span class="nav-icon">📈</span>Progress</div>
+    <div class="nav-section-title">Plan</div>
+    <div class="nav-item" data-page="nutrition"><span class="nav-icon">🥗</span>Nutrition Plan</div>
+    <div class="nav-item" data-page="training"><span class="nav-icon">💪</span>Training Plan</div>
+    <div class="nav-section-title">Database</div>
+    <div class="nav-item" data-page="individuals"><span class="nav-icon">👤</span>Individuals</div>
+    <div class="nav-item" data-page="foods"><span class="nav-icon">🍽️</span>Food Database</div>
+    <div class="nav-item" data-page="exercises"><span class="nav-icon">🏋️</span>Exercise Database</div>
+    <div class="nav-section-title">Reference</div>
+    <div class="nav-item" data-page="knowledge"><span class="nav-icon">📖</span>Knowledge Base</div>
+  </nav>
+  <div class="sidebar-footer">
+    <div style="margin-bottom:4px">Active Individual:</div>
+    <select class="form-select" id="activeIndividualSelect" style="font-size:12px;padding:6px 10px"></select>
+  </div>
+</aside>
+
+<!-- === MAIN === -->
+<main class="main-content">
+<div class="page-header">
+  <h1 class="page-title" id="pageTitle">Dashboard</h1>
+  <p class="page-subtitle" id="pageSubtitle">Your transformation at a glance</p>
+</div>
+<div class="page-body">
+
+<!-- ==================== DASHBOARD ==================== -->
+<section class="page-section active" id="page-dashboard">
+  <div class="dash-hero" id="dashHero"></div>
+  <div class="grid grid-4" id="dashStats"></div>
+  <div style="height:24px"></div>
+  <div class="grid grid-2">
+    <div class="card"><div class="card-header"><div class="card-title"><span class="ct-icon">⚡</span>Performance Targets</div></div>
+      <div id="dashPerformance"></div></div>
+    <div class="card"><div class="card-header"><div class="card-title"><span class="ct-icon">📉</span>Weight Trajectory</div></div>
+      <div class="chart-container"><canvas id="weightChart"></canvas></div></div>
+  </div>
+  <div style="height:20px"></div>
+  <div class="grid grid-2">
+    <div class="card"><div class="card-header"><div class="card-title"><span class="ct-icon">🍽️</span>Today's Nutrition</div></div>
+      <div id="dashNutrition"></div></div>
+    <div class="card"><div class="card-header"><div class="card-title"><span class="ct-icon">🏋️</span>Today's Workout</div></div>
+      <div id="dashWorkout"></div></div>
+  </div>
+  <div id="dashAdvice"></div>
+</section>
+
+<!-- ==================== DAILY LOG ==================== -->
+<section class="page-section" id="page-daily-log">
+  <div class="tabs"><div class="tab active" data-subtab="log-meals">🍽️ Meals</div>
+    <div class="tab" data-subtab="log-exercises">💪 Exercises</div>
+    <div class="tab" data-subtab="log-metrics">📏 Body Metrics</div></div>
+  <div id="logContent"></div>
+</section>
+
+<!-- ==================== PROGRESS ==================== -->
+<section class="page-section" id="page-progress">
+  <div class="grid grid-2">
+    <div class="card"><div class="card-header"><div class="card-title"><span class="ct-icon">⚖️</span>Weight Over Time</div></div>
+      <div class="chart-container"><canvas id="progressWeightChart"></canvas></div></div>
+    <div class="card"><div class="card-header"><div class="card-title"><span class="ct-icon">💪</span>Strength Progress</div></div>
+      <div class="chart-container"><canvas id="progressStrengthChart"></canvas></div></div>
+  </div>
+  <div style="height:20px"></div>
+  <div class="card"><div class="card-header"><div class="card-title"><span class="ct-icon">🥗</span>Macro Averages (Last 7 Days)</div></div>
+    <div class="chart-container"><canvas id="progressMacroChart"></canvas></div></div>
+</section>
+
+<!-- ==================== NUTRITION PLAN ==================== -->
+<section class="page-section" id="page-nutrition">
+  <div class="phase-timeline" id="nutritionPhaseTimeline"></div>
+  <div id="nutritionContent"></div>
+</section>
+
+<!-- ==================== TRAINING PLAN ==================== -->
+<section class="page-section" id="page-training">
+  <div class="phase-timeline" id="trainingPhaseTimeline"></div>
+  <div id="trainingContent"></div>
+</section>
+
+<!-- ==================== INDIVIDUALS ==================== -->
+<section class="page-section" id="page-individuals">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+    <h3 style="font-size:18px">Registered Individuals</h3>
+    <button class="btn btn-primary" onclick="openModal('addIndividual')">+ Add Individual</button>
+  </div>
+  <div id="individualsGrid" class="grid grid-2"></div>
+</section>
+
+<!-- ==================== FOOD DATABASE ==================== -->
+<section class="page-section" id="page-foods">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <div class="tabs" style="margin-bottom:0"><div class="tab active" data-foodcat="all">All</div>
+      <div class="tab" data-foodcat="protein">Proteins</div>
+      <div class="tab" data-foodcat="vegetable">Vegetables</div></div>
+    <button class="btn btn-primary" onclick="openModal('addFood')">+ Add Food</button>
+  </div>
+  <div id="foodsGrid" class="grid grid-3"></div>
+</section>
+
+<!-- ==================== EXERCISE DATABASE ==================== -->
+<section class="page-section" id="page-exercises">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <div class="tabs" style="margin-bottom:0"><div class="tab active" data-excat="all">All</div>
+      <div class="tab" data-excat="back">Back</div><div class="tab" data-excat="chest">Chest</div>
+      <div class="tab" data-excat="legs">Legs</div><div class="tab" data-excat="core">Core</div>
+      <div class="tab" data-excat="biceps">Biceps</div></div>
+    <button class="btn btn-primary" onclick="openModal('addExercise')">+ Add Exercise</button>
+  </div>
+  <div id="exercisesGrid"></div>
+</section>
+
+<!-- ==================== KNOWLEDGE BASE ==================== -->
+<section class="page-section" id="page-knowledge">
+  <div id="knowledgeContent"></div>
+</section>
+
+</div><!-- /page-body -->
+</main>
+</div><!-- /app-shell -->
+
+<!-- === MODAL === -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- === TOAST === -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===================================================================
+// REFORGE — Complete Application Logic
+// ===================================================================
+
+// --- DATABASE (IndexedDB) ---
+const DB_NAME = 'ReforgeDB';
+const DB_VERSION = 3;
+let db = null;
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = (e) => {
+      const d = e.target.result;
+      ['individuals','foods','exercises','plans','dailyLogs','weeklyLogs'].forEach(s => {
+        if (!d.objectStoreNames.contains(s)) d.createObjectStore(s, { keyPath: 'id' });
+      });
+    };
+    req.onsuccess = (e) => { db = e.target.result; resolve(db); };
+    req.onerror = (e) => reject(e);
+  });
+}
+
+function dbGet(store, id) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).get(id);
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function dbGetAll(store) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readonly');
+    const req = tx.objectStore(store).getAll();
+    req.onsuccess = () => resolve(req.result || []);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function dbPut(store, data) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readwrite');
+    tx.objectStore(store).put(data);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+function dbDelete(store, id) {
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readwrite');
+    tx.objectStore(store).delete(id);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+// --- DEFAULT DATA LOADING ---
+// Embedded minimal defaults; also attempts to fetch from JSON files if on GitHub
+const DEFAULT_FOODS = [
+  {id:"f001",name:"Chicken Breast (skinless)",name_es:"Pechuga de pollo",category:"protein",per_100g:{calories:165,protein:31,fat:3.6,net_carbs:0,fibre:0,sodium_mg:74},image_emoji:"🍗",cooking_methods:["Grilled (plancha, no oil)","Poached","Baked in parchment"],seasoning:"Lemon, garlic, pepper, pimentón, oregano",notes:"Primary protein source.",allowed:true,tier:1},
+  {id:"f002",name:"Turkey Breast",name_es:"Pechuga de pavo",category:"protein",per_100g:{calories:135,protein:29,fat:1.5,net_carbs:0,fibre:0,sodium_mg:62},image_emoji:"🦃",cooking_methods:["Grilled","Baked","Sliced, reheated in non-stick"],seasoning:"Cumin, turmeric, paprika",notes:"Avoid processed 'pavo en lonchas'.",allowed:true,tier:1},
+  {id:"f003",name:"Cod (fresh)",name_es:"Bacalao fresco",category:"protein",per_100g:{calories:82,protein:18,fat:0.7,net_carbs:0,fibre:0,sodium_mg:54},image_emoji:"🐟",cooking_methods:["Baked in parchment","Steamed"],seasoning:"Garlic, paprika, parsley, lemon",notes:"Use FRESH cod, not salted.",allowed:true,tier:1},
+  {id:"f004",name:"Hake",name_es:"Merluza",category:"protein",per_100g:{calories:90,protein:20,fat:0.9,net_carbs:0,fibre:0,sodium_mg:72},image_emoji:"🐟",cooking_methods:["Baked in foil","Steamed","Poached"],seasoning:"Lemon, garlic, parsley, pepper",notes:"Lowest-calorie fish option.",allowed:true,tier:1},
+  {id:"f007",name:"Tuna (fresh)",name_es:"Atún fresco",category:"protein",per_100g:{calories:130,protein:26,fat:2,net_carbs:0,fibre:0,sodium_mg:40},image_emoji:"🐟",cooking_methods:["Seared on plancha"],seasoning:"Pepper, lemon, cumin",notes:"Sear rare to medium.",allowed:true,tier:1},
+  {id:"f009",name:"Salmon",name_es:"Salmón",category:"protein",per_100g:{calories:208,protein:20,fat:13,net_carbs:0,fibre:0,sodium_mg:59},image_emoji:"🍣",cooking_methods:["Baked on parchment"],seasoning:"Lemon, dill, pepper",notes:"1-2x/week. Great omega-3.",allowed:true,tier:2},
+  {id:"f010",name:"Shrimp",name_es:"Gambas",category:"protein",per_100g:{calories:99,protein:24,fat:0.3,net_carbs:0,fibre:0,sodium_mg:111},image_emoji:"🦐",cooking_methods:["Grilled plancha","Boiled","Steamed"],seasoning:"Garlic, parsley, lemon",notes:"Slightly higher natural sodium.",allowed:true,tier:2},
+  {id:"f011",name:"Egg Whites",name_es:"Claras de huevo",category:"protein",per_100g:{calories:52,protein:11,fat:0.2,net_carbs:0.7,fibre:0,sodium_mg:166},image_emoji:"🥚",cooking_methods:["Scrambled no oil","Microwaved"],seasoning:"Turmeric, pepper, garlic",notes:"Pure protein base.",allowed:true,tier:1},
+  {id:"f012",name:"Whole Eggs",name_es:"Huevos enteros",category:"protein",per_100g:{calories:155,protein:13,fat:11,net_carbs:1.1,fibre:0,sodium_mg:124},image_emoji:"🥚",cooking_methods:["Scrambled","Hard-boiled","Poached"],seasoning:"Pepper, herbs",notes:"2-3 per day max.",allowed:true,tier:1},
+  {id:"f020",name:"Spinach",name_es:"Espinacas",category:"vegetable",per_100g:{calories:23,protein:2.9,fat:0.4,net_carbs:1.4,fibre:2.2,sodium_mg:79},image_emoji:"🥬",cooking_methods:["Steamed","Raw in salads"],seasoning:"Garlic, lemon, nutmeg",notes:"Rich in iron and magnesium.",allowed:true,tier:1},
+  {id:"f021",name:"Broccoli",name_es:"Brócoli",category:"vegetable",per_100g:{calories:34,protein:2.8,fat:0.4,net_carbs:4,fibre:2.6,sodium_mg:33},image_emoji:"🥦",cooking_methods:["Steamed","Roasted on parchment"],seasoning:"Lemon, garlic, pepper",notes:"Staple vegetable.",allowed:true,tier:1},
+  {id:"f022",name:"Cauliflower",name_es:"Coliflor",category:"vegetable",per_100g:{calories:25,protein:1.9,fat:0.3,net_carbs:3,fibre:2,sodium_mg:30},image_emoji:"🥦",cooking_methods:["Steamed mashed","Roasted","Riced"],seasoning:"Pepper, lemon, garlic",notes:"Versatile keto substitute.",allowed:true,tier:1},
+  {id:"f024",name:"Green Beans",name_es:"Judías verdes",category:"vegetable",per_100g:{calories:31,protein:1.8,fat:0.1,net_carbs:3.6,fibre:3.4,sodium_mg:6},image_emoji:"🫘",cooking_methods:["Steamed","Boiled"],seasoning:"Garlic, lemon, pepper",notes:"Excellent fibre, very low sodium.",allowed:true,tier:1},
+  {id:"f025",name:"Asparagus",name_es:"Espárragos",category:"vegetable",per_100g:{calories:20,protein:2.2,fat:0.1,net_carbs:1.8,fibre:2.1,sodium_mg:2},image_emoji:"🌿",cooking_methods:["Steamed","Grilled","Roasted"],seasoning:"Lemon, pepper",notes:"Natural diuretic. Zero sodium.",allowed:true,tier:1},
+  {id:"f026",name:"Mushrooms",name_es:"Champiñones",category:"vegetable",per_100g:{calories:22,protein:3.1,fat:0.3,net_carbs:2.3,fibre:1,sodium_mg:5},image_emoji:"🍄",cooking_methods:["Dry-sautéed","Grilled","Raw"],seasoning:"Garlic, thyme, pepper, parsley",notes:"Great umami without salt.",allowed:true,tier:1},
+  {id:"f027",name:"Cucumber",name_es:"Pepino",category:"vegetable",per_100g:{calories:15,protein:0.7,fat:0.1,net_carbs:2.2,fibre:0.5,sodium_mg:2},image_emoji:"🥒",cooking_methods:["Raw in salads","Sliced as snack"],seasoning:"Vinegar, lemon, dill",notes:"Hydrating.",allowed:true,tier:1},
+  {id:"f028",name:"Mixed Greens",name_es:"Ensalada mixta",category:"vegetable",per_100g:{calories:18,protein:1.5,fat:0.2,net_carbs:1.5,fibre:1.8,sodium_mg:25},image_emoji:"🥗",cooking_methods:["Raw in salads"],seasoning:"Lemon, vinegar, herbs",notes:"Base of every salad.",allowed:true,tier:1}
+];
+
+const DEFAULT_EXERCISES = [
+  {id:"e001",name:"Lat Pulldown (Wide Grip)",category:"back",muscle_group:"Back (Lats)",image_emoji:"💪",equipment:"Cable machine",description:"Pull bar to upper chest, control 3-sec negative.",purpose:"Builds toward pull-ups.",cues:["Pull elbows toward hips","3-sec negative","Full stretch at top"],phases:[1],weeks:"1-4",sets_reps:"3×12-15"},
+  {id:"e002",name:"Assisted Pull-up",category:"back",muscle_group:"Back (Lats)",image_emoji:"💪",equipment:"Pull-up bar + band",description:"Band-assisted pull-up. Reduce band thickness over time.",purpose:"Direct pull-up progression.",cues:["Initiate with lats","Full dead hang","Chin above bar"],phases:[2],weeks:"5-10",sets_reps:"4×6-10"},
+  {id:"e003",name:"Pull-up (Unassisted)",category:"back",muscle_group:"Back (Lats)",image_emoji:"💪",equipment:"Pull-up bar",description:"Overhand grip, pull chin above bar. Full dead hang between reps.",purpose:"TARGET: 5 unbroken by Week 20.",cues:["No kipping","Full ROM","3-sec negative"],phases:[3,4],weeks:"11-20",sets_reps:"5×3-5"},
+  {id:"e012",name:"Push-up",category:"chest",muscle_group:"Chest, Shoulders, Triceps",image_emoji:"🏋️",equipment:"Floor",description:"Standard push-up. Full ROM, chest to floor.",purpose:"TARGET: 30 unbroken by Week 20.",cues:["Elbows 45°","Core tight","Full range"],phases:[2,3,4],weeks:"5-20",sets_reps:"4-5×10-30"},
+  {id:"e022",name:"Barbell Back Squat",category:"legs",muscle_group:"Quads, Glutes",image_emoji:"🦵",equipment:"Squat rack + barbell",description:"Bar on upper back. Squat to parallel or below.",purpose:"Primary lower body strength.",cues:["Brace core","Knees over toes","Chest up","Use belt"],phases:[2],weeks:"5-10",sets_reps:"4×10-12"},
+  {id:"e041",name:"Plank",category:"core",muscle_group:"Core",image_emoji:"🧘",equipment:"Floor mat",description:"Forearms on ground, body straight. Hold position.",purpose:"TARGET: 5 minutes by Week 20.",cues:["Don't sag or pike","Squeeze glutes","Breathe steadily"],phases:[1,2,3,4],weeks:"3-20",sets_reps:"30s→5min"},
+  {id:"e053",name:"Chin-up (Unassisted)",category:"biceps",muscle_group:"Biceps, Back",image_emoji:"💪",equipment:"Pull-up bar",description:"Underhand grip, shoulder width. Pull chin above bar.",purpose:"TARGET: 8 unbroken by Week 20.",cues:["Supinated grip","Full ROM","Squeeze biceps"],phases:[3,4],weeks:"11-20",sets_reps:"5×4-8"},
+  {id:"e062",name:"Dip (Unassisted)",category:"chest",muscle_group:"Chest, Triceps",image_emoji:"🏋️",equipment:"Dip bars",description:"Parallel bars. Lower until upper arms parallel, press up.",purpose:"TARGET: 15 unbroken by Week 20.",cues:["Slight forward lean","Full depth","Control every rep"],phases:[3,4],weeks:"14-20",sets_reps:"5×6-15"},
+  {id:"e072",name:"Burpee + Squat",category:"conditioning",muscle_group:"Full Body",image_emoji:"🔥",equipment:"Bodyweight",description:"Full burpee with added deep squat at each rep.",purpose:"TARGET: 50 unbroken by Week 20.",cues:["Full push-up","Deep squat hold","Pace yourself","Breathe"],phases:[3,4],weeks:"11-20",sets_reps:"15-50"}
+];
+
+// --- STATE ---
+let state = { activeIndividualId: null, currentPage: 'dashboard', currentWeek: 1, charts: {} };
+
+// --- UTILITY ---
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => document.querySelectorAll(sel);
+const today = () => new Date().toISOString().split('T')[0];
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+
+function toast(msg, type = 'success') {
+  const t = $('#toast');
+  t.textContent = msg; t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function getCurrentPhase(week) {
+  if (week <= 4) return 1; if (week <= 10) return 2; if (week <= 16) return 3; return 4;
+}
+
+function getPhaseColor(phase) {
+  return ['','var(--accent-cyan)','var(--accent-teal)','var(--accent-orange)','var(--accent-purple)'][phase];
+}
+
+// --- NAVIGATION ---
+$$('.nav-item').forEach(el => {
+  el.addEventListener('click', () => {
+    const page = el.dataset.page;
+    navigateTo(page);
+    document.querySelector('.sidebar').classList.remove('open');
+  });
+});
+
+function navigateTo(page) {
+  state.currentPage = page;
+  $$('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.page === page));
+  $$('.page-section').forEach(s => s.classList.toggle('active', s.id === 'page-' + page));
+  const titles = {
+    dashboard:['Dashboard','Your transformation at a glance'],
+    'daily-log':['Daily Log','Track your meals, exercises, and metrics'],
+    progress:['Progress','Visualize your journey'],
+    nutrition:['Nutrition Plan','Phase-by-phase meal planning'],
+    training:['Training Plan','Exercise programming by phase'],
+    individuals:['Individuals','Manage athlete profiles'],
+    foods:['Food Database','Complete nutrition reference'],
+    exercises:['Exercise Database','Movement library with progressions'],
+    knowledge:['Knowledge Base','Complete plan reference guide']
+  };
+  const [title, sub] = titles[page] || ['',''];
+  $('#pageTitle').textContent = title;
+  $('#pageSubtitle').textContent = sub;
+  renderPage(page);
+}
+
+// --- RENDER ENGINE ---
+async function renderPage(page) {
+  const individual = state.activeIndividualId ? await dbGet('individuals', state.activeIndividualId) : null;
+  switch(page) {
+    case 'dashboard': renderDashboard(individual); break;
+    case 'daily-log': renderDailyLog(individual); break;
+    case 'progress': renderProgress(individual); break;
+    case 'nutrition': renderNutrition(individual); break;
+    case 'training': renderTraining(individual); break;
+    case 'individuals': renderIndividuals(); break;
+    case 'foods': renderFoods(); break;
+    case 'exercises': renderExercises(); break;
+    case 'knowledge': renderKnowledge(individual); break;
+  }
+}
+
+// --- DASHBOARD ---
+async function renderDashboard(ind) {
+  if (!ind) {
+    $('#dashHero').innerHTML = `<div class="empty-state"><div class="empty-icon">🚀</div>
+      <div class="empty-title">Welcome to REFORGE</div>
+      <div class="empty-desc">Add your first individual to get started with your transformation plan.</div>
+      <button class="btn btn-primary" onclick="navigateTo('individuals')">+ Add Individual</button></div>`;
+    $('#dashStats').innerHTML = ''; $('#dashPerformance').innerHTML = ''; $('#dashNutrition').innerHTML = '';
+    $('#dashWorkout').innerHTML = ''; $('#dashAdvice').innerHTML = ''; return;
+  }
+
+  const week = state.currentWeek;
+  const phase = getCurrentPhase(week);
+  const phaseName = ['','Foundation','Building','Intensity','Mastery'][phase];
+  const weightLost = ind.start_weight_kg - (ind.weekly_logs?.length > 0 ? ind.weekly_logs[ind.weekly_logs.length-1].weight : ind.start_weight_kg);
+  const targetLoss = ind.start_weight_kg - ind.target_weight_kg;
+  const progressPct = Math.min(100, Math.round((weightLost / targetLoss) * 100));
+  const weekPct = Math.round((week / ind.plan_duration_weeks) * 100);
+
+  $('#dashHero').innerHTML = `
+    <div class="dash-hero-row">
+      <div class="dash-avatar">${ind.avatar || '🏋️'}</div>
+      <div>
+        <div class="dash-name">${ind.name}</div>
+        <div class="dash-meta">
+          <span>📏 ${ind.height_cm} cm</span>
+          <span>⚖️ ${ind.start_weight_kg} kg → ${ind.target_weight_kg} kg</span>
+          <span>🏢 ${ind.gym || 'No gym set'}</span>
+        </div>
+        <div class="dash-week-badge">📅 Week ${week} of ${ind.plan_duration_weeks} — Phase ${phase}: ${phaseName}</div>
+      </div>
+    </div>
+    <div style="margin-top:20px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:6px">
+        <span>Program Progress</span><span>${weekPct}%</span>
+      </div>
+      <div class="progress-bar" style="height:8px"><div class="progress-fill cyan" style="width:${weekPct}%"></div></div>
+    </div>`;
+
+  const currentWeight = ind.weekly_logs?.length > 0 ? ind.weekly_logs[ind.weekly_logs.length-1].weight : ind.start_weight_kg;
+  $('#dashStats').innerHTML = `
+    <div class="stat-card cyan"><div class="stat-label">Current Weight</div>
+      <div class="stat-value cyan">${currentWeight} kg</div>
+      <div class="stat-change ${weightLost > 0 ? 'positive' : ''}">${weightLost > 0 ? '↓' : '—'} ${weightLost.toFixed(1)} kg lost</div></div>
+    <div class="stat-card green"><div class="stat-label">Weight Goal</div>
+      <div class="stat-value green">${progressPct}%</div>
+      <div class="stat-change">${(targetLoss - weightLost).toFixed(1)} kg remaining</div></div>
+    <div class="stat-card orange"><div class="stat-label">IF Protocol</div>
+      <div class="stat-value orange" style="font-size:26px">${getIFProtocol(ind, week)}</div>
+      <div class="stat-change">Current fasting window</div></div>
+    <div class="stat-card purple"><div class="stat-label">Phase</div>
+      <div class="stat-value purple">${phase}</div>
+      <div class="stat-change">${phaseName}</div></div>`;
+
+  // Performance targets
+  const targets = ind.performance_targets || {};
+  const tests = ['pull_ups','push_ups','dips','burpees_with_squat','chin_ups','plank_seconds'];
+  const labels = ['Pull-ups','Push-ups','Dips','Burpees+Squat','Chin-ups','Plank'];
+  const milestones = ind.performance_milestones || [];
+  const currentMilestone = milestones.find(m => m.week >= week) || milestones[milestones.length-1] || {};
+  const lastLog = ind.weekly_logs?.length > 0 ? ind.weekly_logs[ind.weekly_logs.length-1] : {};
+
+  let perfHTML = '';
+  tests.forEach((t, i) => {
+    const target = targets[t] || 0;
+    const current = lastLog[t] || 0;
+    const pct = target > 0 ? Math.min(100, Math.round((current / target) * 100)) : 0;
+    const color = pct >= 100 ? 'green' : pct >= 60 ? 'cyan' : 'orange';
+    perfHTML += `<div style="margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+        <span style="font-weight:600">${labels[i]}</span>
+        <span style="color:var(--text-muted)">${current} / ${t === 'plank_seconds' ? formatTime(target) : target}</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill ${color}" style="width:${pct}%"></div></div>
+    </div>`;
+  });
+  $('#dashPerformance').innerHTML = perfHTML;
+
+  // Weight chart
+  renderWeightChart(ind, 'weightChart');
+
+  // Today's nutrition summary
+  const todayLogs = await getTodayLogs(ind.id);
+  const todayMeals = todayLogs.meals || [];
+  let totalP = 0, totalF = 0, totalC = 0, totalCal = 0;
+  todayMeals.forEach(m => { totalP += m.protein||0; totalF += m.fat||0; totalC += m.carbs||0; totalCal += m.calories||0; });
+  const mt = ind.macro_targets || {};
+  $('#dashNutrition').innerHTML = `
+    <div style="display:flex;gap:16px;margin-bottom:16px">
+      <div style="flex:1;text-align:center;padding:12px;background:rgba(0,212,255,0.06);border-radius:var(--radius-md)">
+        <div style="font-size:11px;color:var(--text-muted)">Protein</div>
+        <div style="font-size:22px;font-weight:800;color:var(--accent-cyan)">${totalP}g</div>
+        <div style="font-size:10px;color:var(--text-dim)">/ ${mt.protein_g?.min||180}g+</div></div>
+      <div style="flex:1;text-align:center;padding:12px;background:rgba(255,138,61,0.06);border-radius:var(--radius-md)">
+        <div style="font-size:11px;color:var(--text-muted)">Fat</div>
+        <div style="font-size:22px;font-weight:800;color:var(--accent-orange)">${totalF}g</div>
+        <div style="font-size:10px;color:var(--text-dim)">/ ${mt.fat_g?.max||80}g max</div></div>
+      <div style="flex:1;text-align:center;padding:12px;background:rgba(167,139,250,0.06);border-radius:var(--radius-md)">
+        <div style="font-size:11px;color:var(--text-muted)">Carbs</div>
+        <div style="font-size:22px;font-weight:800;color:var(--accent-purple)">${totalC}g</div>
+        <div style="font-size:10px;color:var(--text-dim)">/ ${mt.net_carbs_g?.max||40}g max</div></div>
+      <div style="flex:1;text-align:center;padding:12px;background:rgba(52,211,153,0.06);border-radius:var(--radius-md)">
+        <div style="font-size:11px;color:var(--text-muted)">Calories</div>
+        <div style="font-size:22px;font-weight:800;color:var(--accent-green)">${totalCal}</div>
+        <div style="font-size:10px;color:var(--text-dim)">/ ${mt.calories?.min||1800}-${mt.calories?.max||2200}</div></div>
+    </div>
+    ${todayMeals.length === 0 ? '<div style="text-align:center;padding:16px;color:var(--text-muted);font-size:13px">No meals logged today. <a href="#" onclick="navigateTo(\'daily-log\');return false">Log now →</a></div>' : `<div style="font-size:12px;color:var(--text-muted)">${todayMeals.length} meal(s) logged today</div>`}`;
+
+  // Today's workout
+  const todayExercises = todayLogs.exercises || [];
+  $('#dashWorkout').innerHTML = todayExercises.length > 0
+    ? `<div style="font-size:13px;color:var(--text-secondary)">${todayExercises.length} exercise(s) logged today</div>
+       ${todayExercises.map(e => `<div style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:13px">
+         <strong>${e.name}</strong> — ${e.sets}×${e.reps} ${e.weight ? `@ ${e.weight}kg` : ''}</div>`).join('')}`
+    : '<div style="text-align:center;padding:16px;color:var(--text-muted);font-size:13px">No exercises logged today. <a href="#" onclick="navigateTo(\'daily-log\');return false">Log now →</a></div>';
+
+  // Advice engine
+  renderAdvice(ind, todayLogs);
+}
+
+function getIFProtocol(ind, week) {
+  const progs = ind.if_progression || [];
+  for (const p of progs) {
+    const [s, e] = p.weeks.split('-').map(Number);
+    if (week >= s && week <= e) return p.protocol;
+  }
+  return '16:8';
+}
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60); const s = seconds % 60;
+  return s > 0 ? `${m}:${String(s).padStart(2,'0')}` : `${m}:00`;
+}
+
+async function getTodayLogs(indId) {
+  try {
+    const log = await dbGet('dailyLogs', indId + '_' + today());
+    return log || { meals: [], exercises: [], metrics: {} };
+  } catch { return { meals: [], exercises: [], metrics: {} }; }
+}
+
+function renderAdvice(ind, todayLogs) {
+  const advices = [];
+  const week = state.currentWeek;
+  const phase = getCurrentPhase(week);
+  const meals = todayLogs.meals || [];
+  let totalP = 0, totalCal = 0;
+  meals.forEach(m => { totalP += m.protein||0; totalCal += m.calories||0; });
+
+  if (totalP < 150 && meals.length > 0) advices.push({priority:'high',text:`<strong>Protein deficit:</strong> You've logged ${totalP}g protein today. Target is ${ind.macro_targets?.protein_g?.min||180}g+. Add another lean protein serving (200g chicken = ~62g protein).`});
+  if (totalCal > 0 && totalCal < 1500 && meals.length >= 2) advices.push({priority:'medium',text:`<strong>Calorie warning:</strong> Only ${totalCal} kcal logged. Ensure you're eating enough to fuel training and recovery. Undereating slows metabolism.`});
+  if (phase >= 2 && week % 4 === 0) advices.push({priority:'medium',text:`<strong>Testing week:</strong> Week ${week} is a milestone check. Schedule your performance test (pull-ups, push-ups, dips, burpees, chin-ups, plank) on Monday or Friday when fresh.`});
+  if (phase === 1) advices.push({priority:'low',text:`<strong>Phase 1 focus:</strong> Don't rush. This phase is about re-establishing movement patterns safely. Perfect form at light weights now = heavier loads later without injury.`});
+  if (phase >= 3) advices.push({priority:'low',text:`<strong>Progressive overload:</strong> Try to add 1 rep or 1-2 kg to at least one exercise each session. Small, consistent progressions = dramatic results over 20 weeks.`});
+  advices.push({priority:'low',text:`<strong>Hydration:</strong> Drink at least 3-4 litres of water today. On keto with no salt, hydration is critical for kidney function and blood pressure.`});
+
+  if (advices.length > 0) {
+    $('#dashAdvice').innerHTML = `<div class="advice-card">
+      <div class="advice-title">💡 Smart Advice for Today</div>
+      ${advices.map(a => `<div class="advice-item"><span class="advice-priority ${a.priority}">${a.priority.toUpperCase()}</span>${a.text}</div>`).join('')}
+    </div>`;
+  }
+}
+
+// --- CHARTS ---
+function renderWeightChart(ind, canvasId) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  if (state.charts[canvasId]) state.charts[canvasId].destroy();
+
+  const logs = ind.weekly_logs || [];
+  const milestones = ind.performance_milestones || [];
+  const labels = milestones.map(m => `Wk ${m.week}`);
+  const targetData = milestones.map(m => m.weight_kg);
+  const actualData = [];
+  milestones.forEach(m => {
+    const log = logs.find(l => l.week === m.week);
+    actualData.push(log ? log.weight : null);
+  });
+
+  state.charts[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Target', data: targetData, borderColor: 'rgba(0,212,255,0.4)', borderDash: [6,4], borderWidth: 2, pointRadius: 4, pointBackgroundColor: 'rgba(0,212,255,0.6)', fill: false, tension: 0.3 },
+        { label: 'Actual', data: actualData, borderColor: '#00e5b0', borderWidth: 2.5, pointRadius: 5, pointBackgroundColor: '#00e5b0', fill: { target: 'origin', above: 'rgba(0,229,176,0.05)' }, tension: 0.3, spanGaps: true }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: true, labels: { color: '#8b92a8', font: { family: 'Sora', size: 11 }, boxWidth: 12, padding: 16 } } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#555d75', font: { size: 11 } } },
+        y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#555d75', font: { size: 11 } },
+             suggestedMin: ind.target_weight_kg - 5, suggestedMax: ind.start_weight_kg + 2 }
+      }
+    }
+  });
+}
+
+// --- DAILY LOG ---
+function renderDailyLog(ind) {
+  if (!ind) { $('#logContent').innerHTML = '<div class="empty-state"><div class="empty-icon">📝</div><div class="empty-title">Select an individual first</div></div>'; return; }
+
+  const activeTab = document.querySelector('[data-subtab].active')?.dataset.subtab || 'log-meals';
+  // Tab listeners
+  $$('[data-subtab]').forEach(t => {
+    t.onclick = () => {
+      $$('[data-subtab]').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      renderDailyLog(ind);
+    };
+  });
+
+  if (activeTab === 'log-meals') renderLogMeals(ind);
+  else if (activeTab === 'log-exercises') renderLogExercises(ind);
+  else renderLogMetrics(ind);
+}
+
+async function renderLogMeals(ind) {
+  const logs = await getTodayLogs(ind.id);
+  const foods = await dbGetAll('foods');
+  const meals = logs.meals || [];
+
+  let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <h3 style="font-size:16px">Meals for ${today()}</h3>
+    <button class="btn btn-primary btn-sm" onclick="openMealModal()">+ Log Meal</button>
+  </div>`;
+
+  if (meals.length === 0) {
+    html += '<div class="empty-state"><div class="empty-icon">🍽️</div><div class="empty-title">No meals logged yet today</div><div class="empty-desc">Start logging your first meal of the day.</div></div>';
+  } else {
+    let totalP=0,totalF=0,totalC=0,totalCal=0;
+    meals.forEach((m, i) => {
+      totalP+=m.protein||0; totalF+=m.fat||0; totalC+=m.carbs||0; totalCal+=m.calories||0;
+      html += `<div class="meal-card">
+        <div style="display:flex;justify-content:space-between;align-items:start">
+          <div><div class="meal-time">${m.time || '—'}</div><div class="meal-name">${m.name || 'Meal '+(i+1)}</div></div>
+          <button class="btn-icon" onclick="deleteMealEntry(${i})" title="Remove">✕</button>
+        </div>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px">${m.description || ''}</div>
+        <div class="meal-item-macros" style="font-size:12px">
+          <span class="macro-p">P: ${m.protein||0}g</span>
+          <span class="macro-f">F: ${m.fat||0}g</span>
+          <span class="macro-c">C: ${m.carbs||0}g</span>
+          <span style="background:rgba(52,211,153,0.08);color:var(--accent-green);padding:2px 6px;border-radius:4px">${m.calories||0} kcal</span>
+        </div></div>`;
+    });
+    html += `<div class="card" style="margin-top:16px"><div class="card-title" style="margin-bottom:12px">📊 Daily Totals</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;text-align:center">
+        <div><div style="font-size:10px;color:var(--text-muted)">PROTEIN</div><div style="font-size:20px;font-weight:800;color:var(--accent-cyan)">${totalP}g</div></div>
+        <div><div style="font-size:10px;color:var(--text-muted)">FAT</div><div style="font-size:20px;font-weight:800;color:var(--accent-orange)">${totalF}g</div></div>
+        <div><div style="font-size:10px;color:var(--text-muted)">CARBS</div><div style="font-size:20px;font-weight:800;color:var(--accent-purple)">${totalC}g</div></div>
+        <div><div style="font-size:10px;color:var(--text-muted)">CALORIES</div><div style="font-size:20px;font-weight:800;color:var(--accent-green)">${totalCal}</div></div>
+      </div></div>`;
+  }
+  $('#logContent').innerHTML = html;
+}
+
+async function renderLogExercises(ind) {
+  const logs = await getTodayLogs(ind.id);
+  const exercises = logs.exercises || [];
+
+  let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <h3 style="font-size:16px">Exercises for ${today()}</h3>
+    <button class="btn btn-primary btn-sm" onclick="openExerciseLogModal()">+ Log Exercise</button>
+  </div>`;
+
+  if (exercises.length === 0) {
+    html += '<div class="empty-state"><div class="empty-icon">💪</div><div class="empty-title">No exercises logged today</div></div>';
+  } else {
+    exercises.forEach((e, i) => {
+      html += `<div class="exercise-card"><div style="display:flex;justify-content:space-between">
+        <div><div class="exercise-name">${e.name}</div>
+        <div style="font-size:13px;color:var(--text-secondary)">${e.sets}×${e.reps} ${e.weight ? `@ ${e.weight} kg` : ''} ${e.duration ? `— ${e.duration}` : ''}</div>
+        ${e.notes ? `<div style="font-size:12px;color:var(--text-muted);margin-top:4px">${e.notes}</div>` : ''}</div>
+        <button class="btn-icon" onclick="deleteExerciseEntry(${i})" title="Remove">✕</button>
+      </div></div>`;
+    });
+  }
+  $('#logContent').innerHTML = html;
+}
+
+async function renderLogMetrics(ind) {
+  const logs = await getTodayLogs(ind.id);
+  const metrics = logs.metrics || {};
+
+  $('#logContent').innerHTML = `
+    <div class="card" style="max-width:500px">
+      <div class="card-title" style="margin-bottom:16px">📏 Body Metrics — ${today()}</div>
+      <div class="form-group"><label class="form-label">Weight (kg)</label>
+        <input class="form-input" type="number" step="0.1" id="metricWeight" value="${metrics.weight||''}" placeholder="e.g. 132.5"></div>
+      <div class="form-group"><label class="form-label">Waist Circumference (cm)</label>
+        <input class="form-input" type="number" step="0.1" id="metricWaist" value="${metrics.waist||''}" placeholder="Measured at navel"></div>
+      <div class="form-group"><label class="form-label">Blood Pressure (systolic/diastolic)</label>
+        <div class="form-row">
+          <input class="form-input" type="number" id="metricBPSys" value="${metrics.bp_sys||''}" placeholder="Systolic">
+          <input class="form-input" type="number" id="metricBPDia" value="${metrics.bp_dia||''}" placeholder="Diastolic">
+        </div></div>
+      <div class="form-group"><label class="form-label">Energy Level (1-10)</label>
+        <input class="form-input" type="number" min="1" max="10" id="metricEnergy" value="${metrics.energy||''}" placeholder="1=exhausted, 10=amazing"></div>
+      <div class="form-group"><label class="form-label">Sleep Quality (1-10)</label>
+        <input class="form-input" type="number" min="1" max="10" id="metricSleep" value="${metrics.sleep||''}" placeholder="1=terrible, 10=perfect"></div>
+      <div class="form-group"><label class="form-label">Notes</label>
+        <textarea class="form-textarea" id="metricNotes" placeholder="How do you feel? Any symptoms?">${metrics.notes||''}</textarea></div>
+      <button class="btn btn-primary" onclick="saveMetrics()">Save Metrics</button>
+    </div>`;
+}
+
+async function saveMetrics() {
+  const ind = await dbGet('individuals', state.activeIndividualId);
+  if (!ind) return;
+  const logId = ind.id + '_' + today();
+  let log;
+  try { log = await dbGet('dailyLogs', logId); } catch { log = null; }
+  if (!log) log = { id: logId, individual_id: ind.id, date: today(), meals: [], exercises: [], metrics: {} };
+
+  log.metrics = {
+    weight: parseFloat($('#metricWeight').value) || null,
+    waist: parseFloat($('#metricWaist').value) || null,
+    bp_sys: parseInt($('#metricBPSys').value) || null,
+    bp_dia: parseInt($('#metricBPDia').value) || null,
+    energy: parseInt($('#metricEnergy').value) || null,
+    sleep: parseInt($('#metricSleep').value) || null,
+    notes: $('#metricNotes').value
+  };
+  await dbPut('dailyLogs', log);
+
+  // Also update weekly log if weight was entered
+  if (log.metrics.weight) {
+    if (!ind.weekly_logs) ind.weekly_logs = [];
+    const existingIdx = ind.weekly_logs.findIndex(w => w.date === today());
+    const entry = { date: today(), week: state.currentWeek, weight: log.metrics.weight, waist: log.metrics.waist };
+    if (existingIdx >= 0) ind.weekly_logs[existingIdx] = { ...ind.weekly_logs[existingIdx], ...entry };
+    else ind.weekly_logs.push(entry);
+    await dbPut('individuals', ind);
+  }
+  toast('Metrics saved!');
+}
+
+// --- MEAL LOGGING MODAL ---
+async function openMealModal() {
+  const foods = await dbGetAll('foods');
+  const html = `<div class="modal-title">🍽️ Log a Meal</div>
+    <div class="form-group"><label class="form-label">Meal Name</label>
+      <input class="form-input" id="mealName" placeholder="e.g. Post-Workout Lunch"></div>
+    <div class="form-group"><label class="form-label">Time</label>
+      <input class="form-input" type="time" id="mealTime"></div>
+    <div class="form-group"><label class="form-label">Description (foods eaten)</label>
+      <textarea class="form-textarea" id="mealDesc" placeholder="e.g. 250g grilled chicken breast, 200g steamed broccoli, mixed salad"></textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Protein (g)</label><input class="form-input" type="number" id="mealP" placeholder="0"></div>
+      <div class="form-group"><label class="form-label">Fat (g)</label><input class="form-input" type="number" id="mealF" placeholder="0"></div>
+      <div class="form-group"><label class="form-label">Carbs (g)</label><input class="form-input" type="number" id="mealC" placeholder="0"></div>
+      <div class="form-group"><label class="form-label">Calories</label><input class="form-input" type="number" id="mealCal" placeholder="0"></div>
+    </div>
+    <div style="margin:12px 0;padding:12px;background:rgba(0,212,255,0.05);border-radius:var(--radius-sm);font-size:12px;color:var(--text-secondary)">
+      <strong style="color:var(--accent-cyan)">Quick Ref:</strong> 100g chicken breast = 31g P, 3.6g F, 165 kcal | 100g broccoli = 2.8g P, 4g C, 34 kcal
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveMealEntry()">Save Meal</button>
+    </div>`;
+  openModalWith(html);
+}
+
+async function saveMealEntry() {
+  const ind = state.activeIndividualId;
+  if (!ind) return;
+  const logId = ind + '_' + today();
+  let log;
+  try { log = await dbGet('dailyLogs', logId); } catch { log = null; }
+  if (!log) log = { id: logId, individual_id: ind, date: today(), meals: [], exercises: [], metrics: {} };
+
+  log.meals.push({
+    name: $('#mealName').value || 'Meal',
+    time: $('#mealTime').value || '',
+    description: $('#mealDesc').value || '',
+    protein: parseInt($('#mealP').value) || 0,
+    fat: parseInt($('#mealF').value) || 0,
+    carbs: parseInt($('#mealC').value) || 0,
+    calories: parseInt($('#mealCal').value) || 0
+  });
+  await dbPut('dailyLogs', log);
+  closeModal(); toast('Meal logged!');
+  renderPage('daily-log');
+}
+
+async function deleteMealEntry(idx) {
+  const ind = state.activeIndividualId;
+  const logId = ind + '_' + today();
+  const log = await dbGet('dailyLogs', logId);
+  if (log && log.meals) { log.meals.splice(idx, 1); await dbPut('dailyLogs', log); renderPage('daily-log'); toast('Meal removed'); }
+}
+
+// --- EXERCISE LOGGING MODAL ---
+async function openExerciseLogModal() {
+  const exercises = await dbGetAll('exercises');
+  const opts = exercises.map(e => `<option value="${e.id}">${e.name} (${e.muscle_group||e.category})</option>`).join('');
+  openModalWith(`<div class="modal-title">💪 Log an Exercise</div>
+    <div class="form-group"><label class="form-label">Exercise</label>
+      <select class="form-select" id="logExSelect"><option value="">— Select or type below —</option>${opts}</select></div>
+    <div class="form-group"><label class="form-label">Or enter custom name</label>
+      <input class="form-input" id="logExName" placeholder="e.g. Pull-up"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Sets</label><input class="form-input" type="number" id="logExSets" placeholder="3"></div>
+      <div class="form-group"><label class="form-label">Reps</label><input class="form-input" id="logExReps" placeholder="10"></div>
+      <div class="form-group"><label class="form-label">Weight (kg)</label><input class="form-input" type="number" step="0.5" id="logExWeight" placeholder="Optional"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Duration (for plank, cardio)</label>
+      <input class="form-input" id="logExDuration" placeholder="e.g. 60 sec, 15 min"></div>
+    <div class="form-group"><label class="form-label">Notes</label>
+      <textarea class="form-textarea" id="logExNotes" placeholder="How did it feel?"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveExerciseEntry()">Save Exercise</button>
+    </div>`);
+}
+
+async function saveExerciseEntry() {
+  const ind = state.activeIndividualId;
+  const logId = ind + '_' + today();
+  let log; try { log = await dbGet('dailyLogs', logId); } catch { log = null; }
+  if (!log) log = { id: logId, individual_id: ind, date: today(), meals: [], exercises: [], metrics: {} };
+
+  const select = $('#logExSelect');
+  const exId = select.value;
+  let name = $('#logExName').value;
+  if (exId && !name) { const opt = select.options[select.selectedIndex]; name = opt.textContent.split(' (')[0]; }
+
+  log.exercises.push({
+    exercise_id: exId || null,
+    name: name || 'Exercise',
+    sets: parseInt($('#logExSets').value) || 0,
+    reps: $('#logExReps').value || '',
+    weight: parseFloat($('#logExWeight').value) || null,
+    duration: $('#logExDuration').value || '',
+    notes: $('#logExNotes').value || ''
+  });
+  await dbPut('dailyLogs', log);
+  closeModal(); toast('Exercise logged!');
+  renderPage('daily-log');
+}
+
+async function deleteExerciseEntry(idx) {
+  const ind = state.activeIndividualId;
+  const logId = ind + '_' + today();
+  const log = await dbGet('dailyLogs', logId);
+  if (log && log.exercises) { log.exercises.splice(idx, 1); await dbPut('dailyLogs', log); renderPage('daily-log'); toast('Exercise removed'); }
+}
+
+// --- PROGRESS ---
+async function renderProgress(ind) {
+  if (!ind) return;
+  // Weight chart
+  renderWeightChart(ind, 'progressWeightChart');
+
+  // Strength radar
+  const ctx2 = document.getElementById('progressStrengthChart');
+  if (state.charts['progressStrengthChart']) state.charts['progressStrengthChart'].destroy();
+  const targets = ind.performance_targets || {};
+  const lastLog = ind.weekly_logs?.length > 0 ? ind.weekly_logs[ind.weekly_logs.length-1] : {};
+  state.charts['progressStrengthChart'] = new Chart(ctx2, {
+    type: 'radar',
+    data: {
+      labels: ['Pull-ups','Push-ups','Dips','Burpees','Chin-ups','Plank(min)'],
+      datasets: [
+        { label: 'Target', data: [targets.pull_ups||5,targets.push_ups||30,targets.dips||15,targets.burpees_with_squat||50,targets.chin_ups||8,(targets.plank_seconds||300)/60],
+          borderColor: 'rgba(0,212,255,0.5)', backgroundColor: 'rgba(0,212,255,0.05)', borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#00d4ff' },
+        { label: 'Current', data: [lastLog.pull_ups||0,lastLog.push_ups||0,lastLog.dips||0,lastLog.burpees_with_squat||0,lastLog.chin_ups||0,(lastLog.plank_seconds||0)/60],
+          borderColor: '#00e5b0', backgroundColor: 'rgba(0,229,176,0.08)', borderWidth: 2.5, pointRadius: 5, pointBackgroundColor: '#00e5b0' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#8b92a8', font: { family: 'Sora', size: 11 } } } },
+      scales: { r: { angleLines: { color: 'rgba(255,255,255,0.05)' }, grid: { color: 'rgba(255,255,255,0.05)' },
+        ticks: { display: false }, pointLabels: { color: '#8b92a8', font: { size: 11 } } } }
+    }
+  });
+
+  // Macro chart placeholder
+  const ctx3 = document.getElementById('progressMacroChart');
+  if (state.charts['progressMacroChart']) state.charts['progressMacroChart'].destroy();
+  state.charts['progressMacroChart'] = new Chart(ctx3, {
+    type: 'bar',
+    data: {
+      labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+      datasets: [
+        { label: 'Protein (g)', data: [0,0,0,0,0,0,0], backgroundColor: 'rgba(0,212,255,0.6)', borderRadius: 4 },
+        { label: 'Fat (g)', data: [0,0,0,0,0,0,0], backgroundColor: 'rgba(255,138,61,0.6)', borderRadius: 4 },
+        { label: 'Carbs (g)', data: [0,0,0,0,0,0,0], backgroundColor: 'rgba(167,139,250,0.6)', borderRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#8b92a8', font: { family: 'Sora', size: 11 } } } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#555d75' } },
+        y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#555d75' } }
+      }
+    }
+  });
+}
+
+// --- NUTRITION PLAN ---
+async function renderNutrition(ind) {
+  if (!ind) { $('#nutritionContent').innerHTML = '<div class="empty-state"><div class="empty-icon">🥗</div><div class="empty-title">Select an individual first</div></div>'; return; }
+
+  const phase = getCurrentPhase(state.currentWeek);
+  renderPhaseTimeline('nutritionPhaseTimeline', phase, (p) => renderNutritionPhase(ind, p));
+  renderNutritionPhase(ind, phase);
+}
+
+function renderPhaseTimeline(containerId, activePhase, onClick) {
+  const phases = [{n:1,name:'Foundation',w:'Wk 1-4'},{n:2,name:'Building',w:'Wk 5-10'},{n:3,name:'Intensity',w:'Wk 11-16'},{n:4,name:'Mastery',w:'Wk 17-20'}];
+  $(`#${containerId}`).innerHTML = phases.map(p => `
+    <div class="phase-block ${p.n === activePhase ? 'active' : p.n < activePhase ? 'completed' : ''}" 
+         onclick="this.parentElement.querySelectorAll('.phase-block').forEach(b=>b.classList.remove('active'));this.classList.add('active');(${onClick.toString()})(${p.n})">
+      <div class="phase-num">PHASE ${p.n}</div>
+      <div class="phase-label">${p.name}</div>
+      <div class="phase-weeks">${p.w}</div>
+    </div>`).join('');
+}
+
+async function renderNutritionPhase(ind, phase) {
+  const phaseName = ['','Foundation','Acceleration','Peak Protocol','Mastery'][phase];
+  const ifProg = ind.if_progression || [];
+  const phaseIF = ifProg.filter(p => {
+    const [s,e] = p.weeks.split('-').map(Number);
+    return getCurrentPhase(s) === phase || getCurrentPhase(e) === phase;
+  });
+
+  const foods = await dbGetAll('foods');
+  const proteins = foods.filter(f => f.category === 'protein').slice(0, 8);
+  const vegs = foods.filter(f => f.category === 'vegetable').slice(0, 8);
+
+  let html = `<div class="card" style="margin-bottom:20px">
+    <div class="card-title" style="margin-bottom:16px;font-size:18px">Phase ${phase}: ${phaseName}</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px">
+      ${phaseIF.map(p => `<div style="padding:12px;background:rgba(0,212,255,0.05);border-radius:var(--radius-md)">
+        <div style="font-size:11px;color:var(--text-muted)">Weeks ${p.weeks}</div>
+        <div style="font-size:18px;font-weight:700;color:var(--accent-cyan)">${p.protocol}</div>
+        <div style="font-size:11px;color:var(--text-muted)">${p.eating_window}</div>
+      </div>`).join('')}
+    </div>
+    <div style="font-size:14px;color:var(--text-secondary);line-height:1.7">
+      <strong>Daily Macro Targets:</strong> Protein ${ind.macro_targets?.protein_g?.min||180}-${ind.macro_targets?.protein_g?.max||220}g | 
+      Fat ${ind.macro_targets?.fat_g?.min||60}-${ind.macro_targets?.fat_g?.max||80}g | 
+      Net Carbs ≤${ind.macro_targets?.net_carbs_g?.max||40}g | 
+      Calories ${ind.macro_targets?.calories?.min||1800}-${ind.macro_targets?.calories?.max||2200}
+    </div>
+  </div>`;
+
+  html += `<div class="grid grid-2">
+    <div class="card"><div class="card-title" style="margin-bottom:12px">🥩 Allowed Proteins</div>
+      ${proteins.map(f => `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03)">
+        <span style="font-size:22px">${f.image_emoji}</span>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${f.name}</div>
+          <div style="font-size:11px;color:var(--text-muted)">${f.name_es} — ${f.per_100g.protein}g P / ${f.per_100g.calories} kcal per 100g</div></div>
+        <span class="tag tag-cyan">Tier ${f.tier}</span>
+      </div>`).join('')}</div>
+    <div class="card"><div class="card-title" style="margin-bottom:12px">🥬 Allowed Vegetables</div>
+      ${vegs.map(f => `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03)">
+        <span style="font-size:22px">${f.image_emoji}</span>
+        <div style="flex:1"><div style="font-size:13px;font-weight:600">${f.name}</div>
+          <div style="font-size:11px;color:var(--text-muted)">${f.name_es} — ${f.per_100g.net_carbs}g C / ${f.per_100g.calories} kcal per 100g</div></div>
+      </div>`).join('')}</div>
+  </div>`;
+
+  $('#nutritionContent').innerHTML = html;
+}
+
+// --- TRAINING PLAN ---
+async function renderTraining(ind) {
+  if (!ind) { $('#trainingContent').innerHTML = '<div class="empty-state"><div class="empty-icon">💪</div><div class="empty-title">Select an individual first</div></div>'; return; }
+  const phase = getCurrentPhase(state.currentWeek);
+  renderPhaseTimeline('trainingPhaseTimeline', phase, (p) => renderTrainingPhase(ind, p));
+  renderTrainingPhase(ind, phase);
+}
+
+async function renderTrainingPhase(ind, phase) {
+  const exercises = await dbGetAll('exercises');
+  const phaseExercises = exercises.filter(e => e.phases && e.phases.includes(phase));
+  const phaseName = ['','Re-Foundation','Building','Intensity','Mastery'][phase];
+
+  let html = `<div class="card" style="margin-bottom:20px">
+    <div class="card-title" style="margin-bottom:8px;font-size:18px">Phase ${phase}: ${phaseName}</div>
+    <div style="font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:16px">
+      ${phase===1?'Re-establish movement patterns, build base strength using machines, protect the lower back.':
+        phase===2?'Introduce bodyweight movements, increase intensity, begin assisted pull-ups and dips.':
+        phase===3?'Achieve first unassisted pull-ups and chin-ups, build volume, extend plank past 3 minutes.':
+        'Achieve all performance targets. Test frequently. Peak at Week 20.'}
+    </div>
+  </div>`;
+
+  html += '<div class="grid grid-2">';
+  phaseExercises.forEach(e => {
+    const isTarget = e.purpose && e.purpose.includes('TARGET');
+    html += `<div class="exercise-card" style="${isTarget ? 'border-color:rgba(0,229,176,0.2)' : ''}">
+      <div class="exercise-phase" style="color:${getPhaseColor(phase)}">Phase ${phase} — ${e.weeks || ''}</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:28px">${e.image_emoji}</span>
+        <div><div class="exercise-name">${e.name}</div>
+          <div style="font-size:12px;color:var(--text-muted)">${e.muscle_group || e.category} • ${e.equipment}</div></div>
+        ${isTarget ? '<span class="tag tag-green">TARGET</span>' : ''}
+      </div>
+      <div class="exercise-detail" style="margin-top:10px">${e.description}</div>
+      <div style="font-size:12px;color:var(--accent-teal);font-weight:600;margin-bottom:8px">${e.sets_reps || ''}</div>
+      <div class="exercise-cues">${(e.cues||[]).map(c => `<span class="exercise-cue">${c}</span>`).join('')}</div>
+    </div>`;
+  });
+  html += '</div>';
+  $('#trainingContent').innerHTML = html;
+}
+
+// --- INDIVIDUALS ---
+async function renderIndividuals() {
+  const individuals = await dbGetAll('individuals');
+  if (individuals.length === 0) {
+    $('#individualsGrid').innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">👤</div><div class="empty-title">No individuals yet</div><div class="empty-desc">Create your first athlete profile to generate a personalized plan.</div></div>';
+    return;
+  }
+  $('#individualsGrid').innerHTML = individuals.map(ind => `
+    <div class="card" style="cursor:pointer" onclick="selectIndividual('${ind.id}')">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+        <div style="width:56px;height:56px;border-radius:var(--radius-md);background:var(--gradient-main);display:flex;align-items:center;justify-content:center;font-size:28px">${ind.avatar||'🏋️'}</div>
+        <div><div style="font-size:17px;font-weight:700">${ind.name}</div>
+          <div style="font-size:12px;color:var(--text-muted)">${ind.height_cm}cm • ${ind.start_weight_kg}kg → ${ind.target_weight_kg}kg</div></div>
+        ${ind.id === state.activeIndividualId ? '<span class="tag tag-green" style="margin-left:auto">ACTIVE</span>' : ''}
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:11px;text-align:center">
+        <div style="padding:8px;background:rgba(0,212,255,0.05);border-radius:var(--radius-sm)">
+          <div style="color:var(--text-muted)">Plan</div><div style="font-weight:700;color:var(--accent-cyan)">${ind.plan_duration_weeks||20} weeks</div></div>
+        <div style="padding:8px;background:rgba(255,138,61,0.05);border-radius:var(--radius-sm)">
+          <div style="color:var(--text-muted)">Diet</div><div style="font-weight:700;color:var(--accent-orange)">${(ind.dietary_restrictions||[]).length} rules</div></div>
+        <div style="padding:8px;background:rgba(167,139,250,0.05);border-radius:var(--radius-sm)">
+          <div style="color:var(--text-muted)">Logged</div><div style="font-weight:700;color:var(--accent-purple)">${(ind.weekly_logs||[]).length} wks</div></div>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation();selectIndividual('${ind.id}')">Set Active</button>
+        <button class="btn btn-sm btn-danger" onclick="event.stopPropagation();deleteIndividual('${ind.id}')">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+async function selectIndividual(id) {
+  state.activeIndividualId = id;
+  const sel = $('#activeIndividualSelect');
+  sel.value = id;
+  toast('Individual activated');
+  navigateTo('dashboard');
+}
+
+async function deleteIndividual(id) {
+  if (!confirm('Delete this individual and all their data?')) return;
+  await dbDelete('individuals', id);
+  if (state.activeIndividualId === id) {
+    const remaining = await dbGetAll('individuals');
+    state.activeIndividualId = remaining.length > 0 ? remaining[0].id : null;
+  }
+  await refreshIndividualSelect();
+  renderIndividuals();
+  toast('Individual deleted');
+}
+
+// --- ADD INDIVIDUAL MODAL ---
+function openModal(type) {
+  if (type === 'addIndividual') openAddIndividualModal();
+  else if (type === 'addFood') openAddFoodModal();
+  else if (type === 'addExercise') openAddExerciseModal();
+}
+
+function openAddIndividualModal() {
+  openModalWith(`<div class="modal-title">👤 Add Individual</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Name</label><input class="form-input" id="indName" placeholder="Full name"></div>
+      <div class="form-group"><label class="form-label">Avatar Emoji</label><input class="form-input" id="indAvatar" placeholder="🏋️" value="🏋️"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Height (cm)</label><input class="form-input" type="number" id="indHeight" placeholder="180"></div>
+      <div class="form-group"><label class="form-label">Start Weight (kg)</label><input class="form-input" type="number" id="indWeight" placeholder="135"></div>
+      <div class="form-group"><label class="form-label">Target Weight (kg)</label><input class="form-input" type="number" id="indTarget" placeholder="120"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Age</label><input class="form-input" type="number" id="indAge" placeholder="55"></div>
+      <div class="form-group"><label class="form-label">Sex</label><select class="form-select" id="indSex"><option value="male">Male</option><option value="female">Female</option></select></div>
+      <div class="form-group"><label class="form-label">Plan Duration (weeks)</label><input class="form-input" type="number" id="indWeeks" value="20"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Athletic Background</label>
+      <textarea class="form-textarea" id="indBackground" placeholder="Describe your sports history..."></textarea></div>
+    <div class="form-group"><label class="form-label">Health Conditions / Triggers</label>
+      <textarea class="form-textarea" id="indHealth" placeholder="e.g. High blood pressure with salt, sleep apnea, lower back pain..."></textarea></div>
+    <div class="form-group"><label class="form-label">Gym</label>
+      <input class="form-input" id="indGym" placeholder="Gym name and location"></div>
+    <div class="form-group"><label class="form-label">Dietary Restrictions</label>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
+        ${['no_oils','no_salt','no_dairy','keto','intermittent_fasting','vegan','gluten_free'].map(r =>
+          `<label style="display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer">
+            <input type="checkbox" class="diet-restriction" value="${r}" ${r==='no_oils'||r==='no_salt'||r==='no_dairy'||r==='keto'||r==='intermittent_fasting'?'checked':''}> ${r.replace(/_/g,' ')}</label>`
+        ).join('')}
+      </div></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Protein Target (g/day min)</label><input class="form-input" type="number" id="indProtein" value="180"></div>
+      <div class="form-group"><label class="form-label">Calorie Range (min-max)</label>
+        <div class="form-row"><input class="form-input" type="number" id="indCalMin" value="1800"><input class="form-input" type="number" id="indCalMax" value="2200"></div></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveIndividual()">Save Individual</button>
+    </div>`);
+}
+
+async function saveIndividual() {
+  const id = 'ind_' + uid();
+  const restrictions = Array.from($$('.diet-restriction:checked')).map(c => c.value);
+  const weeks = parseInt($('#indWeeks').value) || 20;
+  const startW = parseFloat($('#indWeight').value) || 135;
+  const targetW = parseFloat($('#indTarget').value) || 120;
+  const totalLoss = startW - targetW;
+
+  // Auto-generate milestones
+  const milestoneWeeks = [4, 8, 12, 16, 20].filter(w => w <= weeks);
+  const milestones = milestoneWeeks.map(w => ({
+    week: w, weight_kg: Math.round((startW - (totalLoss * w / weeks)) * 10) / 10,
+    pull_ups: Math.round(5 * w / weeks), push_ups: Math.round(30 * w / weeks),
+    dips: Math.round(15 * w / weeks), burpees: Math.round(50 * w / weeks),
+    chin_ups: Math.round(8 * w / weeks), plank_sec: Math.round(300 * w / weeks)
+  }));
+
+  const ind = {
+    id, name: $('#indName').value || 'New Athlete', avatar: $('#indAvatar').value || '🏋️',
+    height_cm: parseInt($('#indHeight').value) || 180,
+    start_weight_kg: startW, target_weight_kg: targetW,
+    age: parseInt($('#indAge').value) || 30, sex: $('#indSex').value,
+    athletic_background: $('#indBackground').value,
+    health_triggers: ($('#indHealth').value || '').split(',').map(s => s.trim()).filter(Boolean),
+    dietary_restrictions: restrictions,
+    gym: $('#indGym').value, plan_duration_weeks: weeks,
+    macro_targets: {
+      protein_g: { min: parseInt($('#indProtein').value) || 180, max: (parseInt($('#indProtein').value) || 180) + 40 },
+      fat_g: { min: 60, max: 80 }, net_carbs_g: { min: 20, max: 40 },
+      fibre_g: { min: 25, max: 35 },
+      calories: { min: parseInt($('#indCalMin').value) || 1800, max: parseInt($('#indCalMax').value) || 2200 },
+      water_litres: { min: 3, max: 4 }
+    },
+    if_progression: [
+      { weeks: "1-3", protocol: "12:12", fasting_hours: 12, eating_window: "8:00 AM – 8:00 PM" },
+      { weeks: "4-6", protocol: "13:11", fasting_hours: 13, eating_window: "9:00 AM – 8:00 PM" },
+      { weeks: "7-9", protocol: "14:10", fasting_hours: 14, eating_window: "10:00 AM – 8:00 PM" },
+      { weeks: `10-${Math.min(13, weeks)}`, protocol: "15:9", fasting_hours: 15, eating_window: "11:00 AM – 8:00 PM" },
+      { weeks: `${Math.min(14, weeks)}-${weeks}`, protocol: "16:8", fasting_hours: 16, eating_window: "12:00 PM – 8:00 PM" }
+    ],
+    performance_targets: { pull_ups: 5, push_ups: 30, dips: 15, burpees_with_squat: 50, chin_ups: 8, plank_seconds: 300 },
+    performance_milestones: milestones,
+    weekly_logs: [], created_at: today()
+  };
+
+  await dbPut('individuals', ind);
+  state.activeIndividualId = id;
+  await refreshIndividualSelect();
+  closeModal(); toast('Individual created!');
+  navigateTo('individuals');
+}
+
+// --- FOOD & EXERCISE DB ---
+async function renderFoods(filter) {
+  const foods = await dbGetAll('foods');
+  const cat = filter || 'all';
+
+  // Tab listeners
+  $$('[data-foodcat]').forEach(t => {
+    t.onclick = () => {
+      $$('[data-foodcat]').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      renderFoods(t.dataset.foodcat);
+    };
+  });
+
+  const filtered = cat === 'all' ? foods : foods.filter(f => f.category === cat);
+  if (filtered.length === 0) {
+    $('#foodsGrid').innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🍽️</div><div class="empty-title">No foods in database</div></div>';
+    return;
+  }
+
+  $('#foodsGrid').innerHTML = filtered.map(f => `
+    <div class="card" style="padding:16px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <span style="font-size:28px">${f.image_emoji}</span>
+        <div style="flex:1"><div style="font-size:14px;font-weight:700">${f.name}</div>
+          <div style="font-size:11px;color:var(--text-muted)">${f.name_es || ''}</div></div>
+        <span class="tag ${f.category==='protein'?'tag-cyan':'tag-green'}">${f.category}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;text-align:center;font-size:11px;margin-bottom:8px">
+        <div style="padding:4px;background:rgba(0,212,255,0.06);border-radius:4px"><div style="color:var(--text-dim)">P</div><div style="font-weight:700;color:var(--accent-cyan)">${f.per_100g.protein}g</div></div>
+        <div style="padding:4px;background:rgba(255,138,61,0.06);border-radius:4px"><div style="color:var(--text-dim)">F</div><div style="font-weight:700;color:var(--accent-orange)">${f.per_100g.fat}g</div></div>
+        <div style="padding:4px;background:rgba(167,139,250,0.06);border-radius:4px"><div style="color:var(--text-dim)">C</div><div style="font-weight:700;color:var(--accent-purple)">${f.per_100g.net_carbs}g</div></div>
+        <div style="padding:4px;background:rgba(52,211,153,0.06);border-radius:4px"><div style="color:var(--text-dim)">kcal</div><div style="font-weight:700;color:var(--accent-green)">${f.per_100g.calories}</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text-muted);line-height:1.5">${f.notes || ''}</div>
+    </div>`).join('');
+}
+
+async function renderExercises(filter) {
+  const exercises = await dbGetAll('exercises');
+  const cat = filter || 'all';
+
+  $$('[data-excat]').forEach(t => {
+    t.onclick = () => {
+      $$('[data-excat]').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      renderExercises(t.dataset.excat);
+    };
+  });
+
+  const filtered = cat === 'all' ? exercises : exercises.filter(e => e.category === cat);
+  $('#exercisesGrid').innerHTML = filtered.map(e => {
+    const isTarget = e.purpose && e.purpose.includes('TARGET');
+    return `<div class="exercise-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+        <span style="font-size:28px">${e.image_emoji}</span>
+        <div style="flex:1"><div class="exercise-name">${e.name}</div>
+          <div style="font-size:12px;color:var(--text-muted)">${e.muscle_group || e.category} • ${e.equipment}</div></div>
+        ${isTarget ? '<span class="tag tag-green">TARGET</span>' : ''}
+        <span class="tag tag-purple">Ph ${(e.phases||[]).join(',')}</span>
+      </div>
+      <div class="exercise-detail">${e.description}</div>
+      <div style="font-size:12px;margin-bottom:8px"><strong style="color:var(--accent-teal)">${e.sets_reps || ''}</strong> — ${e.purpose || ''}</div>
+      <div class="exercise-cues">${(e.cues||[]).map(c => `<span class="exercise-cue">${c}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+// --- ADD FOOD/EXERCISE MODALS ---
+function openAddFoodModal() {
+  openModalWith(`<div class="modal-title">🍽️ Add Food</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Name (English)</label><input class="form-input" id="foodName" placeholder="e.g. Chicken Breast"></div>
+      <div class="form-group"><label class="form-label">Name (Spanish)</label><input class="form-input" id="foodNameEs" placeholder="e.g. Pechuga de pollo"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Category</label><select class="form-select" id="foodCat"><option value="protein">Protein</option><option value="vegetable">Vegetable</option></select></div>
+      <div class="form-group"><label class="form-label">Emoji</label><input class="form-input" id="foodEmoji" placeholder="🍗"></div>
+    </div>
+    <div style="font-size:12px;font-weight:600;color:var(--text-muted);margin:12px 0 8px">Per 100g:</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Calories</label><input class="form-input" type="number" id="foodCal"></div>
+      <div class="form-group"><label class="form-label">Protein (g)</label><input class="form-input" type="number" id="foodP"></div>
+      <div class="form-group"><label class="form-label">Fat (g)</label><input class="form-input" type="number" step="0.1" id="foodF"></div>
+      <div class="form-group"><label class="form-label">Carbs (g)</label><input class="form-input" type="number" step="0.1" id="foodC"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" id="foodNotes"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveFood()">Save Food</button>
+    </div>`);
+}
+
+async function saveFood() {
+  const food = {
+    id: 'f_' + uid(), name: $('#foodName').value, name_es: $('#foodNameEs').value,
+    category: $('#foodCat').value, image_emoji: $('#foodEmoji').value || '🍽️',
+    per_100g: {
+      calories: parseInt($('#foodCal').value)||0, protein: parseFloat($('#foodP').value)||0,
+      fat: parseFloat($('#foodF').value)||0, net_carbs: parseFloat($('#foodC').value)||0, fibre: 0, sodium_mg: 0
+    },
+    cooking_methods: [], seasoning: '', notes: $('#foodNotes').value, allowed: true, tier: 2
+  };
+  await dbPut('foods', food);
+  closeModal(); toast('Food added!'); renderFoods();
+}
+
+function openAddExerciseModal() {
+  openModalWith(`<div class="modal-title">💪 Add Exercise</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Name</label><input class="form-input" id="exName" placeholder="e.g. Deadlift"></div>
+      <div class="form-group"><label class="form-label">Category</label>
+        <select class="form-select" id="exCat"><option value="back">Back</option><option value="chest">Chest</option><option value="legs">Legs</option><option value="shoulders">Shoulders</option><option value="core">Core</option><option value="biceps">Biceps</option><option value="conditioning">Conditioning</option><option value="cardio">Cardio</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Muscle Group</label><input class="form-input" id="exMuscle" placeholder="e.g. Back (Lats)"></div>
+      <div class="form-group"><label class="form-label">Equipment</label><input class="form-input" id="exEquip" placeholder="e.g. Pull-up bar"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="exDesc"></textarea></div>
+    <div class="form-group"><label class="form-label">Purpose</label><input class="form-input" id="exPurpose"></div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Sets × Reps</label><input class="form-input" id="exSetsReps" placeholder="3×12"></div>
+      <div class="form-group"><label class="form-label">Emoji</label><input class="form-input" id="exEmoji" value="💪"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Phases (comma separated)</label><input class="form-input" id="exPhases" placeholder="1,2,3,4"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveExercise()">Save Exercise</button>
+    </div>`);
+}
+
+async function saveExercise() {
+  const ex = {
+    id: 'ex_' + uid(), name: $('#exName').value, category: $('#exCat').value,
+    muscle_group: $('#exMuscle').value, equipment: $('#exEquip').value,
+    image_emoji: $('#exEmoji').value || '💪', description: $('#exDesc').value,
+    purpose: $('#exPurpose').value, cues: [],
+    phases: ($('#exPhases').value||'').split(',').map(Number).filter(Boolean),
+    weeks: '', sets_reps: $('#exSetsReps').value
+  };
+  await dbPut('exercises', ex);
+  closeModal(); toast('Exercise added!'); renderExercises();
+}
+
+// --- KNOWLEDGE BASE ---
+function renderKnowledge(ind) {
+  const content = buildKnowledgeBase(ind);
+  $('#knowledgeContent').innerHTML = content;
+}
+
+function buildKnowledgeBase(ind) {
+  // This renders the full plan from the markdown as interactive HTML
+  return `
+  <div class="kb-section">
+    <h2>1. Athlete Profile & Starting Point</h2>
+    ${ind ? `<table class="kb-table">
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Height</td><td>${ind.height_cm/100} m</td></tr>
+      <tr><td>Current Weight</td><td>~${ind.start_weight_kg} kg</td></tr>
+      <tr><td>Target Weight</td><td>≤${ind.target_weight_kg} kg (−${ind.start_weight_kg - ind.target_weight_kg} kg)</td></tr>
+      <tr><td>Age</td><td>${ind.age} years</td></tr>
+      <tr><td>Athletic Background</td><td>${ind.athletic_background || 'Not specified'}</td></tr>
+      <tr><td>Health Triggers</td><td>${(ind.health_triggers||[]).join('; ') || 'None listed'}</td></tr>
+      <tr><td>Dietary Restrictions</td><td>${(ind.dietary_restrictions||[]).map(r=>r.replace(/_/g,' ')).join(', ')}</td></tr>
+      <tr><td>Gym</td><td>${ind.gym || 'Not specified'}</td></tr>
+    </table>` : '<p>No individual selected.</p>'}
+    <p>Your athletic history is a huge asset. You have neuromuscular memory, developed tendons and ligaments, excellent recovery capacity, and a psychological understanding of hard training. The challenge is that your metabolism has adapted to store energy aggressively, and your joints carry years of high-level wear. The plan respects both your strengths and your vulnerabilities.</p>
+  </div>
+
+  <div class="kb-section">
+    <h2>2. Medical Context & Disclaimer</h2>
+    <div class="kb-callout kb-danger"><strong>IMPORTANT:</strong> This plan is an informational guide, not a medical prescription. Consult a physician before starting. Get clearance including resting ECG, blood pressure, and blood panel (fasting glucose, lipids, kidney/liver function, HbA1c). Repeat at Week 10 and Week 20.</div>
+    <p>The no-salt, no-oil, no-dairy, lean-keto approach directly addresses blood pressure and apnea triggers. However, keto combined with intermittent fasting can cause electrolyte shifts. Monitor for muscle cramps, dizziness, palpitations, extreme fatigue. Supplement with magnesium glycinate (400 mg/day) and use potassium salt substitute ("sal sin sodio") only if symptoms occur.</p>
+  </div>
+
+  <div class="kb-section">
+    <h2>3. Goal Architecture</h2>
+    <h3>3.1 Weight Loss Target</h3>
+    <p><strong>Minimum:</strong> −${ind ? ind.start_weight_kg - ind.target_weight_kg : 15} kg over ${ind ? ind.plan_duration_weeks : 20} weeks = ~0.75 kg/week average.</p>
+    <p><strong>Realistic trajectory:</strong> Weeks 1–4: Rapid loss of 4–6 kg (water + glycogen depletion). Weeks 5–12: Steady 0.5–0.8 kg/week. Weeks 13–20: Slower 0.3–0.6 kg/week (lean tissue gain offsets some scale weight).</p>
+    <div class="kb-callout"><strong>Scale weight warning:</strong> Because you will be gaining lean muscle while losing fat, the scale may stall. Use waist circumference (measured at navel, morning) as primary metric.</div>
+
+    <h3>3.2 Strength & Bodyweight Performance Targets (Week 20)</h3>
+    <table class="kb-table">
+      <tr><th>Exercise</th><th>Target</th><th>Why</th></tr>
+      <tr><td>Pull-ups (overhand)</td><td>5 unbroken</td><td>Upper back, lats, grip — pulling foundation</td></tr>
+      <tr><td>Push-ups</td><td>30 unbroken</td><td>Chest, shoulders, triceps — muscular endurance</td></tr>
+      <tr><td>Dips</td><td>15 unbroken</td><td>Pressing strength at bodyweight</td></tr>
+      <tr><td>Burpees + Squat</td><td>50 unbroken</td><td>Full-body conditioning, mental toughness</td></tr>
+      <tr><td>Chin-ups (supinated)</td><td>8 unbroken</td><td>Biceps + back pulling emphasis</td></tr>
+      <tr><td>Plank</td><td>5:00 continuous</td><td>Core stability, lower back protection</td></tr>
+    </table>
+  </div>
+
+  <div class="kb-section">
+    <h2>4. Diet Philosophy & Rules</h2>
+    <h3>Core Principles</h3>
+    <div class="kb-callout kb-warning"><strong>NO OILS</strong> — Zero added oils. Fat comes naturally from lean proteins only.</div>
+    <div class="kb-callout kb-warning"><strong>NO SALT</strong> — Zero added NaCl. Use herbs, spices, lemon, vinegar for flavour.</div>
+    <div class="kb-callout kb-warning"><strong>NO DAIRY</strong> — Zero milk, cheese, yogurt, cream, butter.</div>
+    <p><strong>VERY LEAN PROTEIN</strong> — Chicken breast, turkey breast, white fish (cod, hake, sea bass, sole), egg whites, tuna, shrimp, rabbit. Limited whole eggs (2–3/day), salmon (1–2x/week), lean beef (1–2x/week).</p>
+    <p><strong>MOSTLY KETO</strong> — Net carbs under 30–50g/day from vegetables only. High-protein, moderate-fat, very-low-carb. Not "dirty keto."</p>
+
+    <h3>Daily Macronutrient Targets</h3>
+    <table class="kb-table">
+      <tr><th>Macro</th><th>Target</th><th>Rationale</th></tr>
+      <tr><td>Protein</td><td>${ind?.macro_targets?.protein_g?.min||180}–${ind?.macro_targets?.protein_g?.max||220}g</td><td>1.5–1.8g/kg lean mass; preserves muscle in deficit</td></tr>
+      <tr><td>Fat</td><td>${ind?.macro_targets?.fat_g?.min||60}–${ind?.macro_targets?.fat_g?.max||80}g</td><td>Naturally occurring from proteins; no added fats</td></tr>
+      <tr><td>Net Carbs</td><td>≤${ind?.macro_targets?.net_carbs_g?.max||40}g</td><td>Vegetables only; maintains ketosis</td></tr>
+      <tr><td>Calories</td><td>${ind?.macro_targets?.calories?.min||1800}–${ind?.macro_targets?.calories?.max||2200}</td><td>Significant deficit from ~3,000–3,200 maintenance</td></tr>
+      <tr><td>Water</td><td>3–4 litres</td><td>Critical for kidneys, fat metabolism, blood pressure</td></tr>
+    </table>
+  </div>
+
+  <div class="kb-section">
+    <h2>5. Intermittent Fasting Progression</h2>
+    <table class="kb-table">
+      <tr><th>Weeks</th><th>Protocol</th><th>Window</th><th>Fasting</th><th>Notes</th></tr>
+      <tr><td>1–3</td><td>12:12</td><td>8AM – 8PM</td><td>12h</td><td>Easiest transition. 3 meals.</td></tr>
+      <tr><td>4–6</td><td>13:11</td><td>9AM – 8PM</td><td>13h</td><td>Delay breakfast by 1 hour.</td></tr>
+      <tr><td>7–9</td><td>14:10</td><td>10AM – 8PM</td><td>14h</td><td>2 main + 1 small meal.</td></tr>
+      <tr><td>10–13</td><td>15:9</td><td>11AM – 8PM</td><td>15h</td><td>2 meals + optional snack.</td></tr>
+      <tr><td>14–20</td><td>16:8</td><td>12PM – 8PM</td><td>16h</td><td>2 meals. Full protocol.</td></tr>
+    </table>
+    <p><strong>During fasting:</strong> Water, black coffee, herbal tea only. No calories. If lightheaded — eat. Safety overrides protocol.</p>
+  </div>
+
+  <div class="kb-section">
+    <h2>9. Performance Milestones</h2>
+    <table class="kb-table">
+      <tr><th>Test</th><th>Week 4</th><th>Week 8</th><th>Week 12</th><th>Week 16</th><th>Week 20</th></tr>
+      <tr><td>Pull-ups</td><td>0 (assisted)</td><td>1–2</td><td>3</td><td>4</td><td><strong>5</strong></td></tr>
+      <tr><td>Push-ups</td><td>8–12</td><td>12–15</td><td>18–22</td><td>25</td><td><strong>30</strong></td></tr>
+      <tr><td>Dips</td><td>0 (bench)</td><td>3–5 (assisted)</td><td>8</td><td>10–12</td><td><strong>15</strong></td></tr>
+      <tr><td>Burpees+Squat</td><td>10 (modified)</td><td>20 (full)</td><td>30</td><td>40</td><td><strong>50</strong></td></tr>
+      <tr><td>Chin-ups</td><td>0 (assisted)</td><td>2–3</td><td>4–5</td><td>6–7</td><td><strong>8</strong></td></tr>
+      <tr><td>Plank</td><td>0:30–0:45</td><td>1:00–1:30</td><td>2:00–2:30</td><td>3:00–3:30</td><td><strong>5:00</strong></td></tr>
+    </table>
+  </div>
+
+  <div class="kb-section">
+    <h2>10. Recovery & Supplements</h2>
+    <h3>Lower Back Protocol (Every Session)</h3>
+    <p><strong>Pre-Workout:</strong> Cat-Cow (10 reps), Pelvic Tilts (15), Bird-Dog (8 each side), BW Squat stretch (10).</p>
+    <p><strong>Post-Workout:</strong> Child's Pose (3×30s), Knee-to-Chest (2×20s each), Spinal twist (30s each), Dead hang (2×20-30s).</p>
+    <h3>Supplements</h3>
+    <table class="kb-table">
+      <tr><th>Supplement</th><th>Dose</th><th>Reason</th></tr>
+      <tr><td>Magnesium Glycinate</td><td>400mg before bed</td><td>Prevents cramps; improves sleep</td></tr>
+      <tr><td>Vitamin D3</td><td>2,000–4,000 IU/day</td><td>Immune function, mood</td></tr>
+      <tr><td>Omega-3 Fish Oil</td><td>2g EPA+DHA/day</td><td>Anti-inflammatory</td></tr>
+      <tr><td>Creatine Monohydrate</td><td>5g/day</td><td>Strength, recovery, lean mass</td></tr>
+    </table>
+  </div>
+
+  <div class="kb-section">
+    <h2>11–12. Tracking Software</h2>
+    <h3>Nutrition: Cronometer Gold</h3>
+    <p>Set custom macro targets (Protein ≥${ind?.macro_targets?.protein_g?.min||180}g, Net Carbs ≤${ind?.macro_targets?.net_carbs_g?.max||40}g). Enable fasting timer. Use barcode scanner. Create custom recipes for repeated meals. Monitor sodium (target: &lt;200mg from natural sources). Generate weekly PDF reports.</p>
+    <h3>Exercise: Hevy (Free)</h3>
+    <p>Create routine templates for each phase. Log sets/reps/weight mid-workout. Track bodyweight exercises (reps) and timed exercises (plank). Use progress charts to visualize improvement. Create "Performance Test" workout for testing days (Weeks 4, 8, 12, 16, 20).</p>
+    <div class="kb-callout"><strong>Alternatives:</strong> Strong (minimalist, fast), FitNotes (completely free, Android), JEFIT (huge exercise library), Setgraph (exercise-first approach).</div>
+  </div>
+
+  <div class="kb-section">
+    <h2>The Mindset</h2>
+    <p>You have done hard things before. Twenty years of high-level sport taught you discipline, pain tolerance, and the understanding that consistency beats intensity. This program asks for the same: <strong>show up, follow the plan, log everything, and trust the process.</strong></p>
+    <div class="kb-callout"><strong>Key Numbers:</strong> Protein ≥180g daily. Sodium → 0. Net Carbs ≤40g. Water ≥3L. Training 4–6 sessions/week. Sleep 7–8 hours, on your side.</div>
+    <p style="font-size:16px;font-weight:700;color:var(--accent-teal);margin-top:24px">Log everything. Every meal. Every workout. Every week. The data is your accountability partner, your proof of progress, and your compass when you feel lost.</p>
+  </div>`;
+}
+
+// --- MODAL UTILS ---
+function openModalWith(html) { $('#modalContent').innerHTML = html; $('#modalOverlay').classList.add('open'); }
+function closeModal() { $('#modalOverlay').classList.remove('open'); }
+
+// --- INIT ---
+async function init() {
+  await openDB();
+
+  // Seed defaults if empty
+  const existingFoods = await dbGetAll('foods');
+  if (existingFoods.length === 0) {
+    for (const f of DEFAULT_FOODS) await dbPut('foods', f);
+  }
+  const existingExercises = await dbGetAll('exercises');
+  if (existingExercises.length === 0) {
+    for (const e of DEFAULT_EXERCISES) await dbPut('exercises', e);
+  }
+
+  // Try to load richer data from JSON files (for GitHub Pages)
+  try {
+    const [foodsResp, exercisesResp, individualsResp] = await Promise.allSettled([
+      fetch('db_foods.json').then(r => r.ok ? r.json() : null),
+      fetch('db_exercises.json').then(r => r.ok ? r.json() : null),
+      fetch('db_individuals.json').then(r => r.ok ? r.json() : null)
+    ]);
+    if (foodsResp.status === 'fulfilled' && foodsResp.value) {
+      const currentFoods = await dbGetAll('foods');
+      const currentIds = new Set(currentFoods.map(f => f.id));
+      for (const f of foodsResp.value) { if (!currentIds.has(f.id)) await dbPut('foods', f); }
+    }
+    if (exercisesResp.status === 'fulfilled' && exercisesResp.value) {
+      const currentEx = await dbGetAll('exercises');
+      const currentIds = new Set(currentEx.map(e => e.id));
+      for (const e of exercisesResp.value) { if (!currentIds.has(e.id)) await dbPut('exercises', e); }
+    }
+    if (individualsResp.status === 'fulfilled' && individualsResp.value) {
+      const currentInds = await dbGetAll('individuals');
+      const currentIds = new Set(currentInds.map(i => i.id));
+      for (const i of individualsResp.value) { if (!currentIds.has(i.id)) await dbPut('individuals', i); }
+    }
+  } catch (e) { /* JSON files not available — that's fine, defaults are embedded */ }
+
+  // Select first individual
+  const individuals = await dbGetAll('individuals');
+  if (individuals.length > 0 && !state.activeIndividualId) {
+    state.activeIndividualId = individuals[0].id;
+  }
+
+  await refreshIndividualSelect();
+  navigateTo('dashboard');
+}
+
+async function refreshIndividualSelect() {
+  const sel = $('#activeIndividualSelect');
+  const individuals = await dbGetAll('individuals');
+  sel.innerHTML = individuals.map(i => `<option value="${i.id}" ${i.id === state.activeIndividualId ? 'selected' : ''}>${i.name}</option>`).join('');
+  if (individuals.length === 0) sel.innerHTML = '<option>No individuals</option>';
+  sel.onchange = () => { state.activeIndividualId = sel.value; renderPage(state.currentPage); };
+}
+
+// Week selector (for demo/testing — set current week)
+document.addEventListener('keydown', (e) => {
+  if (e.key === '+' && e.ctrlKey) { state.currentWeek = Math.min(20, state.currentWeek + 1); toast(`Week ${state.currentWeek}`); renderPage(state.currentPage); }
+  if (e.key === '-' && e.ctrlKey) { state.currentWeek = Math.max(1, state.currentWeek - 1); toast(`Week ${state.currentWeek}`); renderPage(state.currentPage); }
+});
+
+// Boot
+init().catch(err => console.error('Init failed:', err));
+</script>
+</body>
+</html>

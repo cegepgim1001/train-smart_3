@@ -1,0 +1,176 @@
+[
+  {
+    "id": "f001", "name": "Chicken Breast (skinless)", "name_es": "Pechuga de pollo (sin piel)", "category": "protein",
+    "per_100g": { "calories": 165, "protein": 31, "fat": 3.6, "net_carbs": 0, "fibre": 0, "sodium_mg": 74 },
+    "image_emoji": "🍗", "cooking_methods": ["Grilled (plancha, no oil)", "Poached in water with aromatics", "Baked in parchment at 180°C"],
+    "seasoning": "Lemon, garlic, black pepper, pimentón, oregano, thyme",
+    "notes": "Primary protein source. Buy fresh from carnicería, not pre-marinated.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f002", "name": "Turkey Breast (skinless)", "name_es": "Pechuga de pavo (sin piel)", "category": "protein",
+    "per_100g": { "calories": 135, "protein": 29, "fat": 1.5, "net_carbs": 0, "fibre": 0, "sodium_mg": 62 },
+    "image_emoji": "🦃", "cooking_methods": ["Grilled (plancha, no oil)", "Baked in parchment", "Sliced and reheated in non-stick with water"],
+    "seasoning": "Cumin, turmeric, paprika, black pepper, garlic",
+    "notes": "Avoid processed 'pavo en lonchas' — contains added salt.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f003", "name": "Cod (fresh)", "name_es": "Bacalao fresco", "category": "protein",
+    "per_100g": { "calories": 82, "protein": 18, "fat": 0.7, "net_carbs": 0, "fibre": 0, "sodium_mg": 54 },
+    "image_emoji": "🐟", "cooking_methods": ["Baked in parchment at 180°C with garlic and lemon", "Steamed"],
+    "seasoning": "Garlic, paprika, parsley, lemon",
+    "notes": "CRITICAL: Use fresh cod (bacalao fresco), NOT salted bacalao (bacalao salado) which is extremely high in sodium.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f004", "name": "Hake", "name_es": "Merluza", "category": "protein",
+    "per_100g": { "calories": 90, "protein": 20, "fat": 0.9, "net_carbs": 0, "fibre": 0, "sodium_mg": 72 },
+    "image_emoji": "🐟", "cooking_methods": ["Baked in foil/parchment at 180°C", "Steamed", "Poached"],
+    "seasoning": "Lemon, garlic, parsley, black pepper",
+    "notes": "One of the lowest-calorie protein sources. Excellent for dinner.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f005", "name": "Sea Bass", "name_es": "Lubina", "category": "protein",
+    "per_100g": { "calories": 97, "protein": 20, "fat": 2.0, "net_carbs": 0, "fibre": 0, "sodium_mg": 68 },
+    "image_emoji": "🐟", "cooking_methods": ["Baked whole or filleted", "Grilled on plancha"],
+    "seasoning": "Lemon, thyme, black pepper", "notes": "Premium white fish. Great flavour.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f006", "name": "Sole", "name_es": "Lenguado", "category": "protein",
+    "per_100g": { "calories": 86, "protein": 18, "fat": 1.2, "net_carbs": 0, "fibre": 0, "sodium_mg": 81 },
+    "image_emoji": "🐟", "cooking_methods": ["Baked in parchment", "Grilled on plancha", "Steamed"],
+    "seasoning": "Lemon, dill, parsley", "notes": "Delicate flavour. Cooks quickly.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f007", "name": "Tuna (fresh steak)", "name_es": "Atún fresco", "category": "protein",
+    "per_100g": { "calories": 130, "protein": 26, "fat": 2.0, "net_carbs": 0, "fibre": 0, "sodium_mg": 40 },
+    "image_emoji": "🐟", "cooking_methods": ["Seared on very hot non-stick plancha", "Baked"],
+    "seasoning": "Black pepper, lemon, cumin", "notes": "Sear rare-to-medium for best texture.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f008", "name": "Tuna (canned in water, no salt)", "name_es": "Atún en lata al natural sin sal", "category": "protein",
+    "per_100g": { "calories": 116, "protein": 26, "fat": 0.8, "net_carbs": 0, "fibre": 0, "sodium_mg": 42 },
+    "image_emoji": "🥫", "cooking_methods": ["Ready to eat — drain and serve"],
+    "seasoning": "Lemon juice, apple cider vinegar, herbs",
+    "notes": "Emergency protein. Look for 'sin sal añadida' on label. Check sodium on nutrition label.", "allowed": true, "tier": 2
+  },
+  {
+    "id": "f009", "name": "Salmon", "name_es": "Salmón", "category": "protein",
+    "per_100g": { "calories": 208, "protein": 20, "fat": 13, "net_carbs": 0, "fibre": 0, "sodium_mg": 59 },
+    "image_emoji": "🍣", "cooking_methods": ["Baked on parchment at 180°C with lemon and dill"],
+    "seasoning": "Lemon, dill, black pepper",
+    "notes": "Higher in fat but excellent omega-3 source. Limit to 1–2 times per week.", "allowed": true, "tier": 2
+  },
+  {
+    "id": "f010", "name": "Shrimp/Prawns", "name_es": "Gambas", "category": "protein",
+    "per_100g": { "calories": 99, "protein": 24, "fat": 0.3, "net_carbs": 0, "fibre": 0, "sodium_mg": 111 },
+    "image_emoji": "🦐", "cooking_methods": ["Grilled on plancha (no oil)", "Boiled", "Steamed"],
+    "seasoning": "Garlic, parsley, lemon, black pepper",
+    "notes": "Slightly higher natural sodium — limit to 2–3 times per week.", "allowed": true, "tier": 2
+  },
+  {
+    "id": "f011", "name": "Egg Whites", "name_es": "Claras de huevo", "category": "protein",
+    "per_100g": { "calories": 52, "protein": 11, "fat": 0.2, "net_carbs": 0.7, "fibre": 0, "sodium_mg": 166 },
+    "image_emoji": "🥚", "cooking_methods": ["Scrambled in non-stick (no oil, low heat)", "Boiled (peel yolk out)", "Microwaved"],
+    "seasoning": "Turmeric, black pepper, garlic, herbs",
+    "notes": "Pure protein. Use as a base for breakfast.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f012", "name": "Whole Eggs", "name_es": "Huevos enteros", "category": "protein",
+    "per_100g": { "calories": 155, "protein": 13, "fat": 11, "net_carbs": 1.1, "fibre": 0, "sodium_mg": 124 },
+    "image_emoji": "🥚", "cooking_methods": ["Scrambled (no oil)", "Hard-boiled", "Poached"],
+    "seasoning": "Black pepper, herbs, turmeric",
+    "notes": "Limit to 2–3 whole eggs per day. Yolks provide essential fats and micronutrients.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f013", "name": "Rabbit", "name_es": "Conejo", "category": "protein",
+    "per_100g": { "calories": 150, "protein": 30, "fat": 3.5, "net_carbs": 0, "fibre": 0, "sodium_mg": 45 },
+    "image_emoji": "🐰", "cooking_methods": ["Baked with herbs", "Grilled"],
+    "seasoning": "Rosemary, thyme, garlic, black pepper, lemon",
+    "notes": "Excellent lean game meat. Traditional in Spanish cuisine.", "allowed": true, "tier": 2
+  },
+  {
+    "id": "f014", "name": "Lean Beef Sirloin", "name_es": "Solomillo de ternera", "category": "protein",
+    "per_100g": { "calories": 158, "protein": 28, "fat": 5, "net_carbs": 0, "fibre": 0, "sodium_mg": 55 },
+    "image_emoji": "🥩", "cooking_methods": ["Grilled on plancha (no oil)"],
+    "seasoning": "Black pepper, garlic, rosemary",
+    "notes": "Limit to 1–2 times per week maximum.", "allowed": true, "tier": 3
+  },
+  {
+    "id": "f015", "name": "Sardines (fresh)", "name_es": "Sardinas frescas", "category": "protein",
+    "per_100g": { "calories": 208, "protein": 25, "fat": 11, "net_carbs": 0, "fibre": 0, "sodium_mg": 100 },
+    "image_emoji": "🐟", "cooking_methods": ["Grilled on plancha"],
+    "seasoning": "Lemon, parsley",
+    "notes": "High omega-3. Limit to 1x per week due to fat content.", "allowed": true, "tier": 3
+  },
+  {
+    "id": "f020", "name": "Spinach", "name_es": "Espinacas", "category": "vegetable",
+    "per_100g": { "calories": 23, "protein": 2.9, "fat": 0.4, "net_carbs": 1.4, "fibre": 2.2, "sodium_mg": 79 },
+    "image_emoji": "🥬", "cooking_methods": ["Steamed", "Raw in salads", "Sautéed in non-stick with garlic and water"],
+    "seasoning": "Garlic, lemon, nutmeg", "notes": "Eat liberally. Rich in iron and magnesium.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f021", "name": "Broccoli", "name_es": "Brócoli", "category": "vegetable",
+    "per_100g": { "calories": 34, "protein": 2.8, "fat": 0.4, "net_carbs": 4.0, "fibre": 2.6, "sodium_mg": 33 },
+    "image_emoji": "🥦", "cooking_methods": ["Steamed", "Roasted on parchment (no oil, 200°C)"],
+    "seasoning": "Lemon, garlic, black pepper", "notes": "Staple vegetable. Fresh or frozen equally nutritious.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f022", "name": "Cauliflower", "name_es": "Coliflor", "category": "vegetable",
+    "per_100g": { "calories": 25, "protein": 1.9, "fat": 0.3, "net_carbs": 3.0, "fibre": 2.0, "sodium_mg": 30 },
+    "image_emoji": "🥦", "cooking_methods": ["Steamed and mashed", "Roasted on parchment (no oil)", "Riced"],
+    "seasoning": "Black pepper, lemon, garlic", "notes": "Versatile keto substitute. Roasts well without oil.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f023", "name": "Zucchini", "name_es": "Calabacín", "category": "vegetable",
+    "per_100g": { "calories": 17, "protein": 1.2, "fat": 0.3, "net_carbs": 2.1, "fibre": 1.0, "sodium_mg": 8 },
+    "image_emoji": "🥒", "cooking_methods": ["Grilled on plancha", "Steamed", "Spiralized as noodle substitute"],
+    "seasoning": "Garlic, oregano, lemon", "notes": "Very low calorie and low sodium.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f024", "name": "Green Beans", "name_es": "Judías verdes", "category": "vegetable",
+    "per_100g": { "calories": 31, "protein": 1.8, "fat": 0.1, "net_carbs": 3.6, "fibre": 3.4, "sodium_mg": 6 },
+    "image_emoji": "🫘", "cooking_methods": ["Steamed", "Boiled"],
+    "seasoning": "Garlic, lemon, black pepper", "notes": "Excellent fibre source. Very low sodium.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f025", "name": "Asparagus", "name_es": "Espárragos", "category": "vegetable",
+    "per_100g": { "calories": 20, "protein": 2.2, "fat": 0.1, "net_carbs": 1.8, "fibre": 2.1, "sodium_mg": 2 },
+    "image_emoji": "🌿", "cooking_methods": ["Steamed", "Grilled on plancha", "Roasted on parchment"],
+    "seasoning": "Lemon, black pepper", "notes": "Natural diuretic. Nearly zero sodium.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f026", "name": "Mushrooms", "name_es": "Champiñones", "category": "vegetable",
+    "per_100g": { "calories": 22, "protein": 3.1, "fat": 0.3, "net_carbs": 2.3, "fibre": 1.0, "sodium_mg": 5 },
+    "image_emoji": "🍄", "cooking_methods": ["Dry-sautéed in non-stick (no oil)", "Grilled", "Raw in salads"],
+    "seasoning": "Garlic, thyme, black pepper, parsley", "notes": "Great umami flavour without salt.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f027", "name": "Cucumber", "name_es": "Pepino", "category": "vegetable",
+    "per_100g": { "calories": 15, "protein": 0.7, "fat": 0.1, "net_carbs": 2.2, "fibre": 0.5, "sodium_mg": 2 },
+    "image_emoji": "🥒", "cooking_methods": ["Raw in salads", "Sliced as snack"],
+    "seasoning": "Vinegar, lemon, dill", "notes": "Hydrating. Almost zero everything.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f028", "name": "Mixed Greens (lettuce, rocket, chard)", "name_es": "Ensalada mixta (lechuga, rúcula, acelgas)", "category": "vegetable",
+    "per_100g": { "calories": 18, "protein": 1.5, "fat": 0.2, "net_carbs": 1.5, "fibre": 1.8, "sodium_mg": 25 },
+    "image_emoji": "🥗", "cooking_methods": ["Raw in salads", "Chard: steamed with garlic"],
+    "seasoning": "Lemon juice, apple cider vinegar, herbs", "notes": "Base of every salad. Buy pre-washed bags for convenience.", "allowed": true, "tier": 1
+  },
+  {
+    "id": "f029", "name": "Brussels Sprouts", "name_es": "Coles de Bruselas", "category": "vegetable",
+    "per_100g": { "calories": 43, "protein": 3.4, "fat": 0.3, "net_carbs": 5.2, "fibre": 3.8, "sodium_mg": 25 },
+    "image_emoji": "🥬", "cooking_methods": ["Roasted on parchment (no oil, 200°C, halved)", "Steamed"],
+    "seasoning": "Black pepper, garlic, lemon", "notes": "Slightly higher carb but excellent fibre.", "allowed": true, "tier": 2
+  },
+  {
+    "id": "f030", "name": "Tomatoes", "name_es": "Tomates", "category": "vegetable",
+    "per_100g": { "calories": 18, "protein": 0.9, "fat": 0.2, "net_carbs": 2.7, "fibre": 1.2, "sodium_mg": 5 },
+    "image_emoji": "🍅", "cooking_methods": ["Raw in salads", "Roasted"],
+    "seasoning": "Basil, oregano, black pepper", "notes": "Use in moderation (slightly higher carb).", "allowed": true, "tier": 2
+  },
+  {
+    "id": "f031", "name": "Artichoke", "name_es": "Alcachofa", "category": "vegetable",
+    "per_100g": { "calories": 47, "protein": 3.3, "fat": 0.2, "net_carbs": 5.1, "fibre": 5.4, "sodium_mg": 94 },
+    "image_emoji": "🌿", "cooking_methods": ["Steamed", "Boiled"],
+    "seasoning": "Lemon, garlic", "notes": "Excellent fibre. Watch natural sodium.", "allowed": true, "tier": 2
+  }
+]

@@ -1,0 +1,226 @@
+[
+  {
+    "id": "e001", "name": "Lat Pulldown (Wide Grip)", "category": "back", "muscle_group": "Back (Lats)",
+    "image_emoji": "💪", "equipment": "Cable machine",
+    "description": "Sit at the lat pulldown station. Grip the bar wider than shoulder width, overhand grip. Pull the bar down to upper chest while squeezing shoulder blades together. Control the return (3 sec negative).",
+    "purpose": "Builds toward pull-ups. Primary lat and upper back development.",
+    "cues": ["Pull elbows toward hips, not behind you", "3-second controlled negative", "Full stretch at top", "Don't lean back excessively"],
+    "phases": [1], "weeks": "1-4", "sets_reps": "3x12-15", "progression_to": "e002"
+  },
+  {
+    "id": "e002", "name": "Assisted Pull-up (Band/Machine)", "category": "back", "muscle_group": "Back (Lats)",
+    "image_emoji": "💪", "equipment": "Pull-up bar + resistance band OR assisted machine",
+    "description": "Loop a resistance band over the pull-up bar and place one knee/foot in the loop. Grip the bar overhand, wider than shoulders. Pull your chin above the bar, control the descent.",
+    "purpose": "Real pull-up movement pattern with reduced bodyweight load. Direct progression toward unassisted pull-ups.",
+    "cues": ["Initiate with lats, not arms", "Full dead hang at bottom", "Chin clears bar at top", "Reduce band thickness every 1-2 weeks"],
+    "phases": [2], "weeks": "5-10", "sets_reps": "4x6-10", "progression_to": "e003"
+  },
+  {
+    "id": "e003", "name": "Pull-up (Unassisted)", "category": "back", "muscle_group": "Back (Lats)",
+    "image_emoji": "💪", "equipment": "Pull-up bar",
+    "description": "Dead hang from pull-up bar, overhand grip slightly wider than shoulders. Pull chin above bar. Control descent to full dead hang.",
+    "purpose": "TARGET EXERCISE — 5 unbroken by Week 20.",
+    "cues": ["No kipping or swinging", "Full range of motion", "Squeeze lats at top", "3-second negative if doing singles"],
+    "phases": [3, 4], "weeks": "11-20", "sets_reps": "5x3-5", "progression_to": null
+  },
+  {
+    "id": "e010", "name": "Machine Chest Press", "category": "chest", "muscle_group": "Chest",
+    "image_emoji": "🏋️", "equipment": "Guided chest press machine",
+    "description": "Sit in machine, grip handles at chest height. Press forward to full arm extension. Control the return.",
+    "purpose": "Builds chest pressing strength safely. Foundation for push-ups.",
+    "cues": ["Full range of motion", "Don't lock elbows violently", "Controlled tempo", "Feet flat on floor"],
+    "phases": [1], "weeks": "1-2", "sets_reps": "3x12-15", "progression_to": "e011"
+  },
+  {
+    "id": "e011", "name": "Incline Push-up (Hands on Bench)", "category": "chest", "muscle_group": "Chest",
+    "image_emoji": "🏋️", "equipment": "Flat bench",
+    "description": "Place hands on the edge of a bench, shoulder width apart. Body straight from head to heels. Lower chest toward bench, push back up.",
+    "purpose": "Transition from machine to bodyweight. Reduced load push-up.",
+    "cues": ["Core tight — no sagging hips", "Chest touches bench", "Full lockout at top", "Body straight as a plank"],
+    "phases": [1], "weeks": "3-4", "sets_reps": "3-4x8-12", "progression_to": "e012"
+  },
+  {
+    "id": "e012", "name": "Push-up (Full / From Knees)", "category": "chest", "muscle_group": "Chest",
+    "image_emoji": "🏋️", "equipment": "Floor",
+    "description": "Standard push-up position. Hands slightly wider than shoulders, body straight. Lower chest to floor (or 2cm from floor), push back up. If unable to do full push-ups, start from knees.",
+    "purpose": "TARGET EXERCISE — 30 unbroken by Week 20.",
+    "cues": ["Elbows at 45° angle, not flared", "Core tight throughout", "Full range of motion", "Do max full reps, then drop to knees for remaining"],
+    "phases": [2, 3, 4], "weeks": "5-20", "sets_reps": "4-5x10-25", "progression_to": null
+  },
+  {
+    "id": "e020", "name": "Leg Press", "category": "legs", "muscle_group": "Quads, Glutes",
+    "image_emoji": "🦵", "equipment": "Leg press machine",
+    "description": "Sit in leg press, feet shoulder-width on platform. Lower the weight with control until knees reach 90°. Press through heels to full extension.",
+    "purpose": "Safe quad and glute development. Protects lower back (unlike squats initially).",
+    "cues": ["Feet shoulder width", "Controlled descent", "Don't lock knees at top", "Press through heels"],
+    "phases": [1], "weeks": "1-2", "sets_reps": "3x15-20", "progression_to": "e021"
+  },
+  {
+    "id": "e021", "name": "Goblet Squat", "category": "legs", "muscle_group": "Quads, Glutes, Core",
+    "image_emoji": "🦵", "equipment": "Kettlebell (FSC functional zone)",
+    "description": "Hold a kettlebell at chest height with both hands. Squat down with chest up, knees tracking over toes, to below parallel. Stand back up.",
+    "purpose": "Free-weight squat pattern with natural counterbalance. Builds toward barbell squat.",
+    "cues": ["Chest up, elbows between knees at bottom", "Full depth", "Drive through heels", "Core braced throughout"],
+    "phases": [1], "weeks": "3-4", "sets_reps": "3-4x12", "progression_to": "e022"
+  },
+  {
+    "id": "e022", "name": "Barbell Back Squat (Light)", "category": "legs", "muscle_group": "Quads, Glutes, Core",
+    "image_emoji": "🦵", "equipment": "Squat rack + barbell",
+    "description": "Bar on upper back (high bar position). Feet shoulder width, toes slightly out. Squat to parallel or below. Stand up.",
+    "purpose": "King of lower body exercises. Use belt for lower back support.",
+    "cues": ["Brace core before descent", "Knees track over toes", "Chest up", "Belt recommended for lower back protection"],
+    "phases": [2], "weeks": "5-10", "sets_reps": "4x10-12", "progression_to": "e023"
+  },
+  {
+    "id": "e023", "name": "Front Squat (Barbell)", "category": "legs", "muscle_group": "Quads, Core",
+    "image_emoji": "🦵", "equipment": "Squat rack + barbell",
+    "description": "Bar rests on front deltoids, crossed-arm or clean grip. Squat to parallel or below. Forces upright torso.",
+    "purpose": "Upright torso protects lower back. Quad-dominant. Builds toward burpee squats.",
+    "cues": ["Elbows high", "Upright torso throughout", "Core extremely tight", "If wrists hurt, use crossed-arm grip"],
+    "phases": [3], "weeks": "11-16", "sets_reps": "4-5x8-10", "progression_to": "e024"
+  },
+  {
+    "id": "e024", "name": "Squat Jump (Bodyweight)", "category": "legs", "muscle_group": "Quads, Glutes, Cardio",
+    "image_emoji": "🦵", "equipment": "Bodyweight",
+    "description": "Bodyweight squat to full depth, then explode upward into a jump. Land softly, immediately descend into next squat.",
+    "purpose": "Explosive power. Directly prepares for burpee + squat target.",
+    "cues": ["Full depth squat", "Explode through heels", "Land softly on balls of feet", "Absorb landing into next rep"],
+    "phases": [4], "weeks": "17-20", "sets_reps": "5x15-20", "progression_to": null
+  },
+  {
+    "id": "e030", "name": "Machine Shoulder Press", "category": "shoulders", "muscle_group": "Shoulders",
+    "image_emoji": "🏋️", "equipment": "Guided shoulder press machine",
+    "description": "Sit with back supported. Press handles overhead to full extension. Control the descent.",
+    "purpose": "Safe shoulder pressing with back support.",
+    "cues": ["Don't arch lower back", "Full lockout at top", "Controlled descent"],
+    "phases": [1], "weeks": "1-2", "sets_reps": "3x12-15", "progression_to": "e031"
+  },
+  {
+    "id": "e031", "name": "Dumbbell Shoulder Press (Seated)", "category": "shoulders", "muscle_group": "Shoulders",
+    "image_emoji": "🏋️", "equipment": "Dumbbells + incline bench (85°)",
+    "description": "Sit on bench set to ~85°. Press dumbbells from shoulder height to overhead lockout.",
+    "purpose": "Free weight pressing. Greater stabiliser engagement than machine.",
+    "cues": ["Elbows at 45°, not flared", "Full lockout at top", "Controlled negative"],
+    "phases": [1, 2], "weeks": "3-7", "sets_reps": "3-4x10-12", "progression_to": "e032"
+  },
+  {
+    "id": "e032", "name": "Standing Barbell Overhead Press", "category": "shoulders", "muscle_group": "Shoulders, Core",
+    "image_emoji": "🏋️", "equipment": "Barbell",
+    "description": "Stand with bar at collarbone height. Press overhead to lockout. No leg drive (strict press).",
+    "purpose": "Full-body stability under overhead load. Excellent core engagement.",
+    "cues": ["Squeeze glutes", "Brace core hard", "Bar path is slightly backward (around face)", "No leg drive"],
+    "phases": [3, 4], "weeks": "11-20", "sets_reps": "4-5x6-8", "progression_to": null
+  },
+  {
+    "id": "e040", "name": "Dead Bug", "category": "core", "muscle_group": "Core",
+    "image_emoji": "🧘", "equipment": "Floor mat",
+    "description": "Lie on back, arms pointing to ceiling, knees bent 90°. Extend opposite arm and leg toward floor while keeping lower back pressed into mat. Return and switch sides.",
+    "purpose": "Safest core exercise for people with lower back issues. Teaches core bracing.",
+    "cues": ["Lower back MUST stay flat on the floor", "Slow and controlled", "Exhale as you extend", "If lower back lifts, reduce range of motion"],
+    "phases": [1], "weeks": "1-2", "sets_reps": "3x10 each side", "progression_to": "e041"
+  },
+  {
+    "id": "e041", "name": "Plank (Knees or Full)", "category": "core", "muscle_group": "Core",
+    "image_emoji": "🧘", "equipment": "Floor mat",
+    "description": "Forearms on ground, body straight from head to heels (or knees for modification). Hold position. Squeeze glutes and brace core.",
+    "purpose": "TARGET EXERCISE — 5 minutes continuous by Week 20.",
+    "cues": ["Hips level — don't sag or pike", "Squeeze glutes", "Breathe steadily", "Look at floor between forearms"],
+    "phases": [1, 2, 3, 4], "weeks": "3-20", "sets_reps": "30sec → 5min progression", "progression_to": null
+  },
+  {
+    "id": "e050", "name": "Machine Bicep Curl", "category": "biceps", "muscle_group": "Biceps",
+    "image_emoji": "💪", "equipment": "Bicep curl machine",
+    "description": "Sit at machine. Curl handles toward shoulders with control. Slow negative.",
+    "purpose": "Isolated bicep development. Builds foundation for chin-ups.",
+    "cues": ["Full range of motion", "3-second negative", "Don't swing body"],
+    "phases": [1], "weeks": "1-2", "sets_reps": "3x12-15", "progression_to": "e051"
+  },
+  {
+    "id": "e051", "name": "Dumbbell Bicep Curl (Standing)", "category": "biceps", "muscle_group": "Biceps, Core",
+    "image_emoji": "💪", "equipment": "Dumbbells",
+    "description": "Stand with dumbbells at sides. Curl both or alternate to shoulder height. Slow negative.",
+    "purpose": "Free weight bicep work with standing core engagement.",
+    "cues": ["No swinging", "Full supination at top", "Controlled negative", "Elbows pinned to sides"],
+    "phases": [1, 2], "weeks": "3-10", "sets_reps": "3-4x12", "progression_to": "e052"
+  },
+  {
+    "id": "e052", "name": "Assisted Chin-up (Supinated Grip)", "category": "biceps", "muscle_group": "Biceps, Back",
+    "image_emoji": "💪", "equipment": "Pull-up bar + resistance band",
+    "description": "Same setup as assisted pull-up but with underhand (supinated) grip, hands shoulder-width. Pull chin above bar.",
+    "purpose": "Direct chin-up practice with assistance. Targets biceps more than overhand grip.",
+    "cues": ["Underhand grip, shoulder width", "Full dead hang at bottom", "Chin above bar at top", "Reduce band every 1-2 weeks"],
+    "phases": [2], "weeks": "5-10", "sets_reps": "4x5-10", "progression_to": "e053"
+  },
+  {
+    "id": "e053", "name": "Chin-up (Unassisted)", "category": "biceps", "muscle_group": "Biceps, Back",
+    "image_emoji": "💪", "equipment": "Pull-up bar",
+    "description": "Dead hang, underhand grip, shoulder width. Pull chin above bar. Control descent to full dead hang.",
+    "purpose": "TARGET EXERCISE — 8 unbroken by Week 20.",
+    "cues": ["Supinated (palms facing you) grip", "Full range of motion", "No kipping", "Squeeze biceps at top"],
+    "phases": [3, 4], "weeks": "11-20", "sets_reps": "5x4-8", "progression_to": null
+  },
+  {
+    "id": "e060", "name": "Bench Dip (Feet on Floor)", "category": "chest", "muscle_group": "Chest, Triceps, Shoulders",
+    "image_emoji": "🏋️", "equipment": "Bench",
+    "description": "Hands on bench behind you, fingers forward. Feet on floor. Lower body by bending elbows until upper arms are parallel to floor. Press back up.",
+    "purpose": "Introduction to dip pattern at reduced bodyweight.",
+    "cues": ["Don't go too deep initially", "Elbows track backward, not outward", "Shoulders away from ears"],
+    "phases": [2], "weeks": "8-10", "sets_reps": "3x8-12", "progression_to": "e061"
+  },
+  {
+    "id": "e061", "name": "Dip (Assisted with Band)", "category": "chest", "muscle_group": "Chest, Triceps, Shoulders",
+    "image_emoji": "🏋️", "equipment": "Dip bars + resistance band (FSC cross-training zone)",
+    "description": "Loop band under knees. Grip parallel dip bars, arms straight. Lower body until upper arms parallel to floor. Press back up.",
+    "purpose": "Full dip movement pattern with band assistance. Progression toward unassisted dips.",
+    "cues": ["Slight forward lean for chest emphasis", "Control the descent", "Full lockout at top", "Reduce band assistance progressively"],
+    "phases": [3], "weeks": "11-16", "sets_reps": "4-5x6-10", "progression_to": "e062"
+  },
+  {
+    "id": "e062", "name": "Dip (Unassisted)", "category": "chest", "muscle_group": "Chest, Triceps, Shoulders",
+    "image_emoji": "🏋️", "equipment": "Dip bars",
+    "description": "Grip parallel dip bars. Arms straight at top. Lower until upper arms are parallel to floor (or slightly below). Press back up to lockout.",
+    "purpose": "TARGET EXERCISE — 15 unbroken by Week 20.",
+    "cues": ["Slight forward lean", "Full depth", "No swinging", "Control every rep"],
+    "phases": [3, 4], "weeks": "14-20", "sets_reps": "5x6-15", "progression_to": null
+  },
+  {
+    "id": "e070", "name": "Burpee (Modified)", "category": "conditioning", "muscle_group": "Full Body",
+    "image_emoji": "🔥", "equipment": "Bodyweight",
+    "description": "Step back to plank (don't jump), lower chest to floor or skip push-up, step forward, stand up. No squat or jump yet.",
+    "purpose": "Introduction to burpee movement pattern at manageable intensity.",
+    "cues": ["Step back, don't jump", "Control the descent", "No rush — learn the pattern"],
+    "phases": [1], "weeks": "1-4", "sets_reps": "5-10 reps with rest", "progression_to": "e071"
+  },
+  {
+    "id": "e071", "name": "Burpee (Full)", "category": "conditioning", "muscle_group": "Full Body",
+    "image_emoji": "🔥", "equipment": "Bodyweight",
+    "description": "Squat down, jump feet back to plank, push-up (from knees if needed), jump feet forward to squat position, stand.",
+    "purpose": "Full burpee without the added squat. Builds cardiovascular endurance.",
+    "cues": ["Land softly", "Maintain form even when tired", "Breathe rhythmically"],
+    "phases": [2], "weeks": "5-10", "sets_reps": "10-20 per round", "progression_to": "e072"
+  },
+  {
+    "id": "e072", "name": "Burpee + Added Squat", "category": "conditioning", "muscle_group": "Full Body",
+    "image_emoji": "🔥", "equipment": "Bodyweight",
+    "description": "Full burpee: squat down, jump back to plank, push-up, jump feet forward, DEEP SQUAT (hold for 1 second), then stand. The added squat makes each rep significantly harder.",
+    "purpose": "TARGET EXERCISE — 50 unbroken by Week 20.",
+    "cues": ["Full push-up every rep", "Deep squat hold at bottom", "Pace yourself — this is a 5-8 minute effort at 50 reps", "Breathe: exhale on exertion, inhale on recovery"],
+    "phases": [3, 4], "weeks": "11-20", "sets_reps": "15-50 per set", "progression_to": null
+  },
+  {
+    "id": "e080", "name": "Bulgarian Split Squat", "category": "legs", "muscle_group": "Quads, Glutes (single leg)",
+    "image_emoji": "🦵", "equipment": "Bench + dumbbells",
+    "description": "Rear foot elevated on bench behind you. Front foot forward. Lunge down until rear knee nearly touches floor. Press up through front heel.",
+    "purpose": "Single-leg strength and balance. Addresses left-right imbalances.",
+    "cues": ["Torso upright", "Front knee tracks over toes", "Control the descent", "Equal reps both sides"],
+    "phases": [2], "weeks": "8-10", "sets_reps": "4x8 each leg", "progression_to": "e023"
+  },
+  {
+    "id": "e090", "name": "Treadmill Walk (Incline)", "category": "cardio", "muscle_group": "Cardiovascular",
+    "image_emoji": "🚶", "equipment": "Treadmill",
+    "description": "Walk on treadmill at moderate pace with incline. Used after every circuit session and on active recovery days.",
+    "purpose": "Low-impact cardio that burns calories without stressing joints. Incline increases intensity without impact.",
+    "cues": ["Don't hold handrails", "Pump arms naturally", "Speed 5-7 km/h", "Incline 2-8% depending on phase"],
+    "phases": [1, 2, 3, 4], "weeks": "1-20", "sets_reps": "10-20 min post-circuit", "progression_to": null
+  }
+]

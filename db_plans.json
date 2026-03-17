@@ -1,0 +1,167 @@
+{
+  "meal_plans": [
+    {
+      "phase": 1, "phase_name": "Foundation", "weeks": "1-4", "if_protocol": "12:12 → 13:11",
+      "daily_structure": "3 meals within 11-12 hour window",
+      "days": {
+        "monday": { "label": "Training Day", "meals": [
+          { "time": "08:00", "name": "Breakfast", "items": [{"food_id":"f011","grams":90},{"food_id":"f012","grams":100},{"food_id":"f020","grams":80},{"food_id":"f026","grams":60}], "macros": {"protein":35,"fat":12,"carbs":4,"calories":270} },
+          { "time": "13:00", "name": "Lunch", "items": [{"food_id":"f001","grams":250},{"food_id":"f028","grams":150},{"food_id":"f027","grams":100},{"food_id":"f024","grams":150}], "macros": {"protein":78,"fat":9,"carbs":8,"calories":430} },
+          { "time": "19:30", "name": "Dinner", "items": [{"food_id":"f004","grams":250},{"food_id":"f022","grams":200},{"food_id":"f025","grams":100}], "macros": {"protein":52,"fat":4,"carbs":8,"calories":280} }
+        ]},
+        "tuesday": { "label": "Rest Day", "meals": [
+          { "time": "08:00", "name": "Breakfast", "items": [{"food_id":"f012","grams":150},{"food_id":"f020","grams":100},{"food_id":"f026","grams":80}], "macros": {"protein":30,"fat":16,"carbs":3,"calories":280} },
+          { "time": "13:00", "name": "Lunch", "items": [{"food_id":"f002","grams":250},{"food_id":"f021","grams":200},{"food_id":"f028","grams":100}], "macros": {"protein":75,"fat":4,"carbs":10,"calories":385} },
+          { "time": "19:30", "name": "Dinner", "items": [{"food_id":"f005","grams":250},{"food_id":"f025","grams":150},{"food_id":"f027","grams":100}], "macros": {"protein":52,"fat":5,"carbs":6,"calories":280} }
+        ]},
+        "wednesday": { "label": "Training Day", "meals": [
+          { "time": "08:00", "name": "Breakfast", "items": [{"food_id":"f011","grams":120},{"food_id":"f012","grams":100},{"food_id":"f023","grams":100}], "macros": {"protein":28,"fat":12,"carbs":3,"calories":235} },
+          { "time": "13:00", "name": "Lunch", "items": [{"food_id":"f007","grams":250},{"food_id":"f022","grams":200},{"food_id":"f028","grams":100}], "macros": {"protein":68,"fat":8,"carbs":7,"calories":370} },
+          { "time": "19:30", "name": "Dinner", "items": [{"food_id":"f001","grams":250},{"food_id":"f028","grams":200},{"food_id":"f021","grams":150}], "macros": {"protein":81,"fat":10,"carbs":7,"calories":440} }
+        ]},
+        "thursday": { "label": "Rest Day", "meals": [
+          { "time": "08:00", "name": "Breakfast", "items": [{"food_id":"f011","grams":90},{"food_id":"f010","grams":150},{"food_id":"f020","grams":80}], "macros": {"protein":46,"fat":2,"carbs":2,"calories":200} },
+          { "time": "13:00", "name": "Lunch", "items": [{"food_id":"f003","grams":250},{"food_id":"f029","grams":150},{"food_id":"f020","grams":100}], "macros": {"protein":52,"fat":2,"carbs":10,"calories":275} },
+          { "time": "19:30", "name": "Dinner", "items": [{"food_id":"f002","grams":200},{"food_id":"f024","grams":200},{"food_id":"f027","grams":100}], "macros": {"protein":60,"fat":3,"carbs":9,"calories":310} }
+        ]},
+        "friday": { "label": "Training Day", "meals": [
+          { "time": "08:00", "name": "Breakfast", "items": [{"food_id":"f012","grams":100},{"food_id":"f001","grams":150},{"food_id":"f021","grams":100}], "macros": {"protein":62,"fat":14,"carbs":5,"calories":400} },
+          { "time": "13:00", "name": "Lunch", "items": [{"food_id":"f009","grams":200},{"food_id":"f024","grams":200},{"food_id":"f028","grams":100}], "macros": {"protein":42,"fat":26,"carbs":5,"calories":430} },
+          { "time": "19:30", "name": "Dinner", "items": [{"food_id":"f002","grams":250},{"food_id":"f022","grams":200},{"food_id":"f025","grams":100}], "macros": {"protein":76,"fat":4,"carbs":7,"calories":375} }
+        ]},
+        "saturday": { "label": "Conditioning Day", "meals": [
+          { "time": "08:00", "name": "Breakfast", "items": [{"food_id":"f011","grams":120},{"food_id":"f012","grams":100},{"food_id":"f026","grams":100}], "macros": {"protein":30,"fat":12,"carbs":3,"calories":250} },
+          { "time": "13:00", "name": "Lunch", "items": [{"food_id":"f001","grams":300},{"food_id":"f021","grams":200},{"food_id":"f020","grams":100}], "macros": {"protein":100,"fat":12,"carbs":9,"calories":555} },
+          { "time": "19:30", "name": "Dinner", "items": [{"food_id":"f006","grams":250},{"food_id":"f023","grams":200},{"food_id":"f028","grams":150}], "macros": {"protein":48,"fat":3,"carbs":7,"calories":255} }
+        ]},
+        "sunday": { "label": "Full Rest", "meals": [
+          { "time": "09:00", "name": "Brunch", "items": [{"food_id":"f012","grams":150},{"food_id":"f002","grams":200},{"food_id":"f020","grams":100},{"food_id":"f027","grams":100}], "macros": {"protein":73,"fat":17,"carbs":4,"calories":465} },
+          { "time": "15:00", "name": "Late Lunch", "items": [{"food_id":"f004","grams":250},{"food_id":"f025","grams":150},{"food_id":"f022","grams":150}], "macros": {"protein":53,"fat":3,"carbs":6,"calories":270} },
+          { "time": "19:30", "name": "Dinner", "items": [{"food_id":"f001","grams":200},{"food_id":"f024","grams":200},{"food_id":"f030","grams":80}], "macros": {"protein":66,"fat":8,"carbs":8,"calories":365} }
+        ]}
+      }
+    }
+  ],
+  "training_plans": [
+    {
+      "phase": 1, "phase_name": "Re-Foundation", "weeks": "1-4",
+      "goal": "Re-establish movement patterns, build base strength using machines and assisted movements, activate stabiliser muscles, protect the lower back.",
+      "frequency": "3 strength + 2 active recovery + 1 conditioning + 1 rest",
+      "circuit_config": { "rounds": "3-4", "rest_between_exercises": "60-90 sec", "rest_between_rounds": "2.5-3 min" },
+      "workouts": {
+        "strength": [
+          {"exercise_id":"e001","sets":3,"reps":"12-15","notes":"Control the negative (3 sec down)"},
+          {"exercise_id":"e010","sets":3,"reps":"12-15","notes":"Full range of motion"},
+          {"exercise_id":"e020","sets":3,"reps":"15-20","notes":"Feet shoulder-width, controlled"},
+          {"exercise_id":"e030","sets":3,"reps":"12-15","notes":"Seated, back supported"},
+          {"exercise_id":"e040","sets":3,"reps":"10 each side","notes":"Lower back must stay flat"},
+          {"exercise_id":"e050","sets":3,"reps":"12-15","notes":"Full range, 3-sec negative"}
+        ],
+        "conditioning": [
+          {"exercise_id":"e070","sets":5,"reps":"5","notes":"Modified: step back, no jump, no squat"},
+          {"exercise_id":"e011","sets":3,"reps":"30 sec","notes":"Wall push-ups"},
+          {"exercise_id":"e041","sets":3,"reps":"20 sec","notes":"Knee plank"}
+        ],
+        "post_circuit_cardio": {"exercise_id":"e090","duration_min":10,"incline_pct":3,"speed_kmh":5.5}
+      }
+    },
+    {
+      "phase": 2, "phase_name": "Building", "weeks": "5-10",
+      "goal": "Introduce bodyweight movements, increase intensity, add free weights, begin assisted pull-up and dip work.",
+      "frequency": "3 strength + 1 conditioning + 2 active recovery + 1 rest",
+      "circuit_config": { "rounds": "4", "rest_between_exercises": "40-45 sec", "rest_between_rounds": "2 min" },
+      "workouts": {
+        "strength": [
+          {"exercise_id":"e002","sets":4,"reps":"6-10","notes":"Use thickest band initially, reduce every 1-2 weeks"},
+          {"exercise_id":"e012","sets":4,"reps":"8-15","notes":"From knees if needed, progress to full"},
+          {"exercise_id":"e022","sets":4,"reps":"10-12","notes":"Light weight, belt recommended for lower back"},
+          {"exercise_id":"e031","sets":4,"reps":"8-10","notes":"Lateral raise + overhead press combo"},
+          {"exercise_id":"e041","sets":4,"reps":"45-90 sec","notes":"Full plank from toes"},
+          {"exercise_id":"e052","sets":4,"reps":"5-10","notes":"Supinated grip, band assistance"},
+          {"exercise_id":"e060","sets":3,"reps":"8-12","notes":"Weeks 8-10 only: bench dip introduction"}
+        ],
+        "conditioning": [
+          {"exercise_id":"e071","sets":3,"reps":"10-15","notes":"Full burpee form"},
+          {"exercise_id":"e012","sets":3,"reps":"15","notes":"Push-ups (knees if needed)"},
+          {"exercise_id":"e041","sets":3,"reps":"30-45 sec","notes":"Full plank"}
+        ],
+        "post_circuit_cardio": {"exercise_id":"e090","duration_min":15,"incline_pct":5,"speed_kmh":6}
+      }
+    },
+    {
+      "phase": 3, "phase_name": "Intensity", "weeks": "11-16",
+      "goal": "Achieve first unassisted pull-ups and chin-ups, build push-up and dip volume, train burpee endurance, extend plank toward 3+ minutes.",
+      "frequency": "4 strength/conditioning + 2 active recovery + 1 rest",
+      "circuit_config": { "rounds": "4-5", "rest_between_exercises": "30-40 sec", "rest_between_rounds": "90 sec" },
+      "workouts": {
+        "strength": [
+          {"exercise_id":"e003","sets":5,"reps":"3-5","notes":"Max unassisted + band for remaining reps"},
+          {"exercise_id":"e012","sets":5,"reps":"15-20","notes":"Volume building. Strict form."},
+          {"exercise_id":"e023","sets":5,"reps":"8-10","notes":"Front squat forces upright torso"},
+          {"exercise_id":"e032","sets":5,"reps":"6-8","notes":"Strict press, no leg drive"},
+          {"exercise_id":"e041","sets":3,"reps":"2-3 min","notes":"Build toward 3 min continuous"},
+          {"exercise_id":"e053","sets":5,"reps":"3-6","notes":"Max unassisted + band for remaining"},
+          {"exercise_id":"e061","sets":5,"reps":"6-10","notes":"Band under knees for assistance"}
+        ],
+        "conditioning": [
+          {"exercise_id":"e072","sets":4,"reps":"15","notes":"Full burpee + squat"},
+          {"exercise_id":"e012","sets":4,"reps":"20","notes":"Push-ups"},
+          {"exercise_id":"e061","sets":4,"reps":"8","notes":"Dips (assisted if needed)"},
+          {"exercise_id":"e041","sets":4,"reps":"60 sec","notes":"Plank"}
+        ],
+        "post_circuit_cardio": {"exercise_id":"e090","duration_min":10,"incline_pct":6,"speed_kmh":6.5}
+      }
+    },
+    {
+      "phase": 4, "phase_name": "Mastery", "weeks": "17-20",
+      "goal": "Achieve all performance targets. Test frequently. Polish form. Peak performance at Week 20.",
+      "frequency": "4 sessions + 2 active recovery + 1 rest",
+      "circuit_config": { "rounds": "5", "rest_between_exercises": "30 sec", "rest_between_rounds": "60 sec" },
+      "workouts": {
+        "strength": [
+          {"exercise_id":"e003","sets":5,"reps":"4-5","notes":"Approaching 5 reps per set"},
+          {"exercise_id":"e012","sets":5,"reps":"22-30","notes":"Approaching 30 unbroken"},
+          {"exercise_id":"e024","sets":5,"reps":"15-20","notes":"Explosive, full depth"},
+          {"exercise_id":"e032","sets":5,"reps":"6","notes":"Maintain shoulder strength"},
+          {"exercise_id":"e041","sets":2,"reps":"4-5 min","notes":"Approaching 5 min hold"},
+          {"exercise_id":"e053","sets":5,"reps":"6-8","notes":"Approaching 8 reps per set"},
+          {"exercise_id":"e062","sets":5,"reps":"10-15","notes":"Approaching 15 unbroken"}
+        ],
+        "conditioning": [
+          {"exercise_id":"e003","sets":1,"reps":"5","notes":"Pull-ups"},
+          {"exercise_id":"e012","sets":1,"reps":"30","notes":"Push-ups"},
+          {"exercise_id":"e062","sets":1,"reps":"15","notes":"Dips"},
+          {"exercise_id":"e072","sets":1,"reps":"50","notes":"Burpees + Squat"},
+          {"exercise_id":"e053","sets":1,"reps":"8","notes":"Chin-ups"},
+          {"exercise_id":"e041","sets":1,"reps":"5 min","notes":"Plank — THE GAUNTLET full rehearsal"}
+        ],
+        "post_circuit_cardio": {"exercise_id":"e090","duration_min":10,"incline_pct":6,"speed_kmh":6.5}
+      }
+    }
+  ],
+  "recovery_protocol": {
+    "pre_workout": [
+      "Cat-Cow stretch: 10 slow reps",
+      "Pelvic Tilts: 15 reps",
+      "Bird-Dog: 8 each side",
+      "Bodyweight Squat to stretch: 10 reps, hold bottom 3 sec"
+    ],
+    "post_workout": [
+      "Child's Pose: 3 × 30 sec",
+      "Knee-to-Chest: 2 × 20 sec each side",
+      "Lying spinal twist: 30 sec each side",
+      "Dead hang from pull-up bar: 2 × 20-30 sec"
+    ],
+    "active_recovery_day": [
+      "Walk: 20-30 min at 5-6 km/h",
+      "Cat-Cow: 10 reps",
+      "Child's Pose: 3 × 30 sec",
+      "Knee-to-Chest: 2 × 20 sec each side",
+      "Pelvic Tilts: 15 reps",
+      "Bird-Dog: 10 each side",
+      "Deep lunge stretch: 30 sec each side",
+      "Pigeon stretch: 30 sec each side",
+      "Foam rolling: thoracic spine, quads, glutes, calves — 10 passes each"
+    ]
+  }
+}
